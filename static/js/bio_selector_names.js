@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const heightIndex = header.indexOf("height");
             const weightIndex = header.indexOf("weight");
             const urlIndex = header.indexOf('img_url');
+            const pidIndex = header.indexOf('pid');
 
             if ([nameIndex, surnameIndex, positionIndex, heightIndex, weightIndex].includes(-1)) {
                 console.error("Colonnes manquantes dans le fichier CSV.");
@@ -31,7 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         position: columns[positionIndex],
                         height: columns[heightIndex],
                         weight: columns[weightIndex],
-                        url: columns[urlIndex]
+                        url: columns[urlIndex],
+                        pid: columns[pidIndex]
                     };
 
                     playersData.push(player);
