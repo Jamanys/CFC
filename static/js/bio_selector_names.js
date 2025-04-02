@@ -1,6 +1,18 @@
 let playersData = []; // Stocker les données des joueurs
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+    load_data_and_selector()
+    console.log("end bsn")
+    document.addEventListener("DOMContentLoaded", function () {
+    load_data_and_selector()
+    });
+});
+
+
+
+
+function load_data_and_selector(){
+    console.log("start bsn")
     fetch("../static/csv/AS Player Infos.csv")
         .then(response => response.text())
         .then(data => {
@@ -13,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const heightIndex = header.indexOf("height");
             const weightIndex = header.indexOf("weight");
             const urlIndex = header.indexOf('img_url');
+            const pidIndex = header.indexOf('pid');
 
             if ([nameIndex, surnameIndex, positionIndex, heightIndex, weightIndex].includes(-1)) {
                 console.error("Colonnes manquantes dans le fichier CSV.");
@@ -31,7 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         position: columns[positionIndex],
                         height: columns[heightIndex],
                         weight: columns[weightIndex],
-                        url: columns[urlIndex]
+                        url: columns[urlIndex],
+                        pid: columns[pidIndex]
                     };
 
                     playersData.push(player);
@@ -44,4 +58,4 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => console.error("Erreur lors du chargement du fichier CSV :", error));
-});
+}
