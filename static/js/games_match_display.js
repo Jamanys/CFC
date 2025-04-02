@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const pidRow = columns[header.indexOf("pid")];
                     // Convertir la date au format JJ/MM/AAAA en un format que JavaScript peut comprendre
                     const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
-                    const date = new Date(year, month - 1, day);  // mois commence à 0 en JavaScript
+                    const date = new Date(year, month, day);  // mois commence à 0 en JavaScript
                     return oppositionCode && date && (pidRow == player_id);
                 });
 
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const beforeDate = filteredLines.filter(line => {
                     const dateStr = line.split(",")[header.indexOf("date")];
                     const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
-                    const date = new Date(year, month, day);  // mois commence à 0 en JavaScript
+                    const date = new Date(year, month, day);
                     return date < new Date("2025-04-13");
                 })
                 .sort((a, b) => {
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     return dateA - dateB;  // Trie du plus ancien au plus récent
                 })
-                .slice(0, 4);  // Récupérer les 4 premiers matchs
+                .slice(-4);  // Récupérer les 4 premiers matchs
 
                 // Récupérer le premier match après la date limite
                 const afterDate = filteredLines.find(line => {
@@ -51,13 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Fusionner les deux ensembles de données : avant et après la date
                 const mergedData = beforeDate.concat(afterDate ? [afterDate] : []);
-                console.log("Données fusionnées:", mergedData);
-
-                // Sélectionner la div pour l'affichage
-                const divElement = document.getElementById("E-games");
 
                 // Afficher les matchs dans la div
-                output = ``
+                let output = ``
                 mergedData.forEach(line => {
                     const columns = line.split(",");
 
@@ -82,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (mergedData.length === 0) {
                 output = "<p>No game played or planed for this player</p>";
             }
+            const divElement = document.getElementById("E-games");
             divElement.innerHTML = output
         });
     })

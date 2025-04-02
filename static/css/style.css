@@ -71,8 +71,10 @@ body {
     flex: 1;
     background-color: #00f138;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 1%;
 }
 
 #E-player-select {
@@ -87,4 +89,9 @@ body {
 
 #F-game {
     background-color: antiquewhite;
+}
+
+#F-rec-stats {
+    background-color: antiquewhite;
+    text-align: center;
 }

@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (selectedPlayer) {
             bioInfoDiv.innerHTML = `
-                <p> ${selectedPlayer.name} ${selectedPlayer.surname}</p>
                 <p></p>
                 <img src="${selectedPlayer.url}" alt="${selectedPlayer.surname} Pictures" style="width:100%;height:50%;">
                 <p> ${selectedPlayer.position}</p>
