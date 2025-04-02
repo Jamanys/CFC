@@ -1,0 +1,177 @@
+/* Reset global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Blanc cassé */
+    color: #1a1a1a; /* Texte sombre pour le contraste */
+}
+
+/* Conteneur principal */
+#A-base {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-color: #ffffff;
+    gap : 1%;
+    padding: 1%;
+}
+
+/* Section principale */
+#B-main {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    gap: 1%;
+}
+
+/* Informations */
+#C-info {
+    display: flex;
+    flex-direction: row;
+    flex: 3;
+    border-radius: 10px;
+    padding: 1%;
+    gap: 1%;
+}
+
+#C-targets {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1%;
+
+    background-color: #ffffff;
+    padding : 1%;
+    border-radius: 8px;
+}
+
+#D-bio {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+}
+
+/* Jeux et récupération */
+#D-games_and_recovery {
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    gap:2%;
+    flex: 3;
+    border-radius: 10px;
+}
+
+/* Cartes et éléments interactifs */
+#D-target-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    min-width: 100px;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#E-games{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff; /* Bleu plus intense */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+}
+
+#E-recovery {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff; /* Bleu plus intense */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+}
+
+
+#B-physical {
+    flex: 3;
+    background-color: #0d47a1; /* Bleu roi */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px; /* Plus d'espace pour l'aération */
+    border-radius: 12px; /* Bords légèrement plus arrondis */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Ombre plus douce */
+    gap: 1.5%;
+}
+
+#C-movement {
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    width: 95%;
+    background-color: #0a346e; /* Bleu plus intense */
+    border-radius: 8px;
+    text-align: center;
+}
+
+#D-phy-stats {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 3%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#E-quality, #E-phy-text {
+    color: #e3f2fd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#F-game {
+    color :  #0a346e
+}
+
+
+
+
+
+
+/* Responsivité */
+@media (max-width: 768px) {
+    #A-base {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #B-main, #B-physical {
+        flex: 1;
+    }
+
+    #D-target-card {
+        width: 80%;
+    }
+}
+
+

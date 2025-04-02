@@ -36,14 +36,6 @@ body {
     background-color: #0066ff;
 }
 
-#C-targets {
-    flex: 2;
-    background-color: #cd0000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #D-bio {
     flex: 1;
     background-color: #c9e621;
@@ -64,6 +56,8 @@ body {
     flex: 1;
     background-color: #00d9f1;
     display: flex;
+    flex-direction: row;
+
     justify-content: center;
     align-items: center;
     gap: 1%;
@@ -90,6 +84,7 @@ body {
 
 #F-game {
     background-color: antiquewhite;
+    width: 10%;
 }
 
 #F-rec-stats {
@@ -133,4 +128,55 @@ body {
 #F-phy-stats {
     display: flex;
     flex-direction: column;
+}
+
+#C-targets {
+    flex: 2;
+    background-color: #cd0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1%;
+}
+
+#D-target-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    min-width: 100px;
+
+    background-color: antiquewhite;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (max-width: 768px) {
+    #A-base {
+        flex-direction: column; /* Empile les éléments au lieu d'un affichage en ligne */
+    }
+
+    #B-main, #B-physical {
+        flex: 1; /* Réduit leur taille */
+    }
+
+    #D-bio {
+        width: 100%; /* Prend toute la largeur sur mobile */
+    }
+
+    #D-target-card {
+        width: 80%; /* Ajuste la taille des cartes */
+    }
+
+    #E-games {
+        flex: 1;
+        background-color: #00d9f1;
+        display: flex;
+        flex-direction: row;
+    
+        justify-content: center;
+        align-items: center;
+        gap: 1%;
+    }
 }

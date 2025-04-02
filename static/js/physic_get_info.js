@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!selectedPlayer) return; // Sécurité si le joueur n'existe pas
     
         const player_id = selectedPlayer.pid;
-        console.log(player_id)
         
         // Définition des dates
         const today = new Date(2025, 2, 13);  // 13/03/2025 (Mois - 1 car JS commence à 0)
@@ -84,8 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Injecter les stats dans la balise B-physical
                 const physicalContainer = document.getElementById("B-physical");
-                console.log(statsPrev30)
-                console.log(statsPrev30)
                 physicalContainer.innerHTML = `
                     <div id="C-movement">
                     <p>Agility</p>

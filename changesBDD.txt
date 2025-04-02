@@ -1,10 +1,15 @@
-# Player Info :
+# AS Player Infos.csv :
  creation une bdd player info avec nom,prenom,age,position,taille,poid,url of profile picture et pid (playerID)
-
-# Individual Priority :
- Ajout colonne pid pour relier les joueurs avec leurs objectifs,
- colonne treshold pour faciliter la comparaison entre perf/recovery et objectifs
-
 
 # CFC GPS data :
 Ajout d'une colonne pid pour relier les perf GPS au joueur concerné.
+
+# CFC Individual Priority Areas.csv:
+ Ajout colonne pid pour relier les joueurs avec leurs objectifs,
+ colonne treshold pour faciliter la comparaison entre perf/recovery et objectifs
+
+# CFC Physical Capability Data.csv
+Ajout colonne pid pour relier les joueurs avec leurs performances physiques
+
+#CFC Recovery status Data.csv
+Ajout d'une colonne pid pour relier les joueurs avec les informations de récupération
