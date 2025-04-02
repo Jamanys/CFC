@@ -1,6 +1,18 @@
 let playersData = []; // Stocker les données des joueurs
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+    load_data_and_selector()
+    console.log("end bsn")
+    document.addEventListener("DOMContentLoaded", function () {
+    load_data_and_selector()
+    });
+});
+
+
+
+
+function load_data_and_selector(){
+    console.log("start bsn")
     fetch("../static/csv/AS Player Infos.csv")
         .then(response => response.text())
         .then(data => {
@@ -46,4 +58,4 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => console.error("Erreur lors du chargement du fichier CSV :", error));
-});
+}
