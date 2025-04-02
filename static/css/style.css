@@ -20,11 +20,13 @@ body {
 }
 
 #B-physical {
-    flex: 2;
-    background-color: #540007;
+    flex: 3;
+    background-color: #f6b21f;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1%;
 }
 
 #C-info {
@@ -84,7 +86,6 @@ body {
 #E-Bio_infos p {
     color: black;
     text-align: center;
-
 }
 
 #F-game {
@@ -94,4 +95,42 @@ body {
 #F-rec-stats {
     background-color: antiquewhite;
     text-align: center;
+}
+
+
+/* Chaque bloc de mouvement */
+#C-movement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Conteneur des statistiques */
+#D-phy-stats {
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+    width: 100%;
+}
+
+/* Ligne des titres "Last 30d" et "Previous 30d" */
+#E-phy-text {
+    display: flex;
+    flex-direction: column;
+    width: 12%;
+}
+
+/* Chaque bloc de qualité */
+#E-quality {
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    background-color: antiquewhite;
+}
+
+/* Conteneur des statistiques pour une qualité */
+#F-phy-stats {
+    display: flex;
+    flex-direction: column;
 }

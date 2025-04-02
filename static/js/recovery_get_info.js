@@ -13,12 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const twoWeekAgo = new Date(today_day);
         twoWeekAgo.setDate(today_day.getDate() - 14);
 
-        console.log(
-            today_day.toISOString().split("T")[0],
-            oneWeekAgo.toISOString().split("T")[0],
-            twoWeekAgo.toISOString().split("T")[0]
-        );
-
         fetch("../static/csv/CFC Recovery status Data.csv")
             .then(response => response.text())
             .then(data => {
@@ -76,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const output = `
                     <div id="F-text">
                         <p>\n</p>
-                        <p><strong> 7 day mean :</strong></p>
-                        <p><strong> Last week status :</strong></p>
+                        <p><strong> Last 7 days :</strong></p>
+                        <p><strong> Previous 7 days :</strong></p>
                     </div>
                     <div id="F-rec-stats">
                         <p>Emboss</p>
