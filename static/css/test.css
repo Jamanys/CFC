@@ -3,28 +3,61 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa; /* Blanc cassé */
-    color: #1a1a1a; /* Texte sombre pour le contraste */
+    background-color: #1d2327; /* Blanc cassé */
+    color: #ffffff; /* Texte sombre pour le contraste */
 }
 
 /* Conteneur principal */
 #A-base {
     display: flex;
-    flex-direction: row;
-    height: 100vh;
-    background-color: #ffffff;
+    flex-direction: column;
     gap : 1%;
+}
+
+#AB-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
     padding: 1%;
+    height: 5%;
+    gap: 5%;
+}
+
+#AB-bot{
+    flex : 19;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap : 3%;
+    padding: 1%;
+    border-radius: 10px;
+    background-color:#101517;
+}
+
+#E-player-select {
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#E-player-select:hover {
+    background-color: #8592f7;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 /* Section principale */
 #B-main {
-    flex: 6;
+    flex: 5.5;
     display: flex;
     flex-direction: column;
-    padding: 1%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     gap: 1%;
 }
 
@@ -32,97 +65,132 @@ body {
 #C-info {
     display: flex;
     flex-direction: row;
-    flex: 3;
+    height: 79%;
+    width: 100%;
     border-radius: 10px;
     padding: 1%;
     gap: 1%;
-}
-
-#C-targets {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 1%;
-
-    background-color: #ffffff;
-    padding : 1%;
-    border-radius: 8px;
 }
 
 #D-bio {
     flex: 1;
-    background-color: #ffffff;
+    background-color: #1d2327;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
-}
-
-/* Jeux et récupération */
-#D-games_and_recovery {
-    display: flex;
-    flex-direction: column;
-    padding: 1%;
-    gap:2%;
-    flex: 3;
-    border-radius: 10px;
-}
-
-/* Cartes et éléments interactifs */
-#D-target-card {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 30%;
-    min-width: 100px;
-    background-color: #ffffff;
     justify-content: center;
     align-items: center;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#E-Bio_infos {
+    text-align: center;
+    margin-top: 15px;
+}
+
+#E-Bio_infos h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.player-img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgb(0, 37, 249);
+    margin-bottom: 10px;
+}
+/* Jeux et récupération */
+#D-games_and_recovery {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+    gap: 1%;
 }
 
 #E-games{
-    flex: 1;
     display: flex;
     flex-direction: row;
+    height: 40%;
+
+    background-color: #1d2327;
+    color : whitesmoke;
+
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: #ffffff; /* Bleu plus intense */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+    border-radius: 10px;
 }
 
 #E-recovery {
-    flex: 1;
     display: flex;
     flex-direction: column;
+    height: 60%;
+
+    background-color: #1d2327;
+    color : whitesmoke;
+
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    background-color: #ffffff; /* Bleu plus intense */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+    padding: 5%;
 }
 
 
+/* CSS POUR PARTIE TARGET*/
+#C-targets {
+    display: flex;
+    flex-direction: row;
+    height: 19%;
+    width: 100%;
+
+    border-radius: 10px;
+    padding: 1%;
+    gap: 1%;
+}
+
+.D-target-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a346e;
+    border-radius: 8px;
+    gap: 2%;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 90%;
+    width: 33.3%;
+}
+
+.date, .tracking {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icon {
+    font-size: 1.2em;
+}
+
+/* CSS POUR PARTIE PHYSIQUE*/
 #B-physical {
-    flex: 2;
-    background-color: #0d47a1; /* Bleu roi */
+    flex:2;
+    background-color: #0a346e;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px; /* Plus d'espace pour l'aération */
-    border-radius: 12px; /* Bords légèrement plus arrondis */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Ombre plus douce */
-    gap: 1.5%;
+    padding: 1%; /* Plus d'espace pour l'aération */
+    border-radius: 10px; /* Bords légèrement plus arrondis */
+    gap: 1%;
 }
 
 #C-movement {
@@ -132,7 +200,7 @@ body {
     flex-direction: column;
     justify-content: center; /* Centre le contenu verticalement */
     align-items: center; /* Centre horizontalement */
-    background-color: #0b3b83; /* Bleu plus intense */
+    background-color: #072754;
     border-radius: 8px;
     text-align: center;
     overflow: hidden; /* Empêche les dépassements */
@@ -159,28 +227,29 @@ canvas {
     text-align: center;
 }
 
-#F-game {
-    color :  #0a346e
-}
-
-
-
-
-
 
 /* Responsivité */
 @media (max-width: 768px) {
+    #body {
+        width: 98%;
+    }
     #A-base {
+        display: flex;
         flex-direction: column;
         height: auto;
     }
 
     #B-main, #B-physical {
-        flex: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     #D-target-card {
         width: 80%;
+        display: flex;
+        flex-direction: column;
+
     }
 }
 

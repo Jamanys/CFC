@@ -16,27 +16,30 @@
 </head>
 <body>
     <div id="A-base">
-        <div id="B-main">
-            <div id="C-info">
-                <div id="D-bio">
-                    <select id="E-player-select">
-                        <p>CFC PLAYER SUPERVISOR</p>
-                        <option value="Wesley Fofana">Sélectionner un joueur</option>
-                    </select>
-                    <div id = E-Bio_infos>
-                    </div>
-                </div>
-                <div id="D-games_and_recovery">
-                    <div id="E-games">Games</div>
-                    <div id="E-recovery">
-                        <p>RECOVERY EVOLUTION</p>
-                        <canvas id="E-recovery-chart" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div id="C-targets">targets</div>
+        <div id ="AB-top">
+            <label for="E-player-select">CFC PLAYER SUPERVISOR</label>
+            <select id="E-player-select">
+                <option value="Wesley Fofana" disabled selected>Sélectionner un joueur</option>
+            </select>
         </div>
-        <div id="B-physical"> physical </div>
+        <div id="AB-bot">
+            <div id="B-main">
+                <div id="C-info">
+                    <div id="D-bio">
+                        <div id="E-Bio_infos"></div>
+                    </div>
+                    <div id="D-games_and_recovery">
+                        <div id="E-games">Games</div>
+                        <div id="E-recovery">
+                            <p>RECOVERY EVOLUTION</p>
+                            <canvas id="E-recovery-chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div id="C-targets">targets</div>
+            </div>
+            <div id="B-physical"> physical </div>
+        </div>
     </div>
 </body>
 </html>

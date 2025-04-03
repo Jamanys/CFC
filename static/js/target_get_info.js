@@ -57,11 +57,18 @@ function get_target_info(select){
         const targetDiv = document.getElementById("C-targets");
         targetDiv.innerHTML = top3Targets.map(row => {
             const formattedDate = row.reviewDate.toLocaleDateString("fr-FR", { day: '2-digit', month: '2-digit' });
+
+            // Définition des icônes selon la valeur de `tracking`
+            let trackingIcon = "";
+            if (row.tracking === "Achieved") trackingIcon = "💪";
+            else if (row.tracking === "On Track") trackingIcon = "🏃";
+            else if (row.tracking === "Miss") trackingIcon = "❌";
+
             return `
-                <div id="D-target-card">
-                    <p>${row.target}</p>
-                    <p>${formattedDate}</p>
-                    <p>${row.tracking}</p>
+                <div class="D-target-card">
+                    <p class="target">${row.target}</p>
+                    <p class="date"><span class="icon">⏰ :</span> ${formattedDate}</p>
+                    <p class="tracking">${trackingIcon} ${row.tracking}</p>
                 </div>`;
         }).join("");
     })
