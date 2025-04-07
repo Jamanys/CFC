@@ -102,12 +102,33 @@ window.recoveryChart = new Chart(ctx, {
             { label: "Bio", data: bio, borderColor: "#9966FF", fill: false }
         ]
     },
+
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        legend: {
+            labels: {
+                fontColor: "white",
+            }
+        },
         scales: {
             x: { title: { display: true, text: "Date" } },
-            y: { title: { display: true, text: "Score" }}
+            y: { title: { display: true, text: "Score" }},
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    fontSize: 10,
+                    stepSize: 0.2,
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    fontSize: 10,
+                    beginAtZero: true
+                }
+            }]
         }
     }
 });

@@ -3,126 +3,196 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa; /* Blanc cassé */
-    color: #1a1a1a; /* Texte sombre pour le contraste */
+    background-color:#101517fa;
+    color: #ffffff;
 }
 
 /* Conteneur principal */
 #A-base {
     display: flex;
+    flex-direction: column;
+    gap : 10px;
+}
+
+#AB-top{
+    display: flex;
     flex-direction: row;
-    height: 100vh;
-    background-color: #ffffff;
-    gap : 1%;
-    padding: 1%;
+    justify-content: center;
+    align-content: center;
+    max-height: 2em;
+    padding: 10px;
+    gap: 10px;
+}
+
+#AB-bot{
+    flex : 19;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap : 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#E-player-select {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#E-player-select:hover {
+    background-color: #8592f7;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 /* Section principale */
 #B-main {
-    flex: 6;
+    flex: 5.5;
     display: flex;
     flex-direction: column;
-    padding: 1%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    gap: 1%;
+    gap: 10px;
 }
 
 /* Informations */
 #C-info {
     display: flex;
     flex-direction: row;
-    flex: 3;
+    max-height:48em;
     border-radius: 10px;
-    padding: 1%;
-    gap: 1%;
-}
-
-#C-targets {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 1%;
-
-    background-color: #ffffff;
-    padding : 1%;
-    border-radius: 8px;
+    gap: 10px;
+    /* background-color: #ff0000; */
 }
 
 #D-bio {
-    flex: 1;
-    background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
-}
 
-/* Jeux et récupération */
-#D-games_and_recovery {
-    display: flex;
-    flex-direction: column;
-    padding: 1%;
-    gap:2%;
-    flex: 3;
-    border-radius: 10px;
-}
-
-/* Cartes et éléments interactifs */
-#D-target-card {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 30%;
-    min-width: 100px;
-    background-color: #ffffff;
+    background-color: #1d2327;
     justify-content: center;
     align-items: center;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#E-Bio_infos {
+    text-align: center;
+    margin-top: 15px;
+}
+
+#E-Bio_infos h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.player-img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+/* Jeux et récupération */
+#D-games_and_recovery {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
 }
 
 #E-games{
-    flex: 1;
     display: flex;
     flex-direction: row;
+    max-height: 40%;
+    max-width: 100%;
+
+    background-color: #1d2327;
+    color : whitesmoke;
+
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    background-color: #ffffff; /* Bleu plus intense */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+    border-radius: 10px;
 }
 
 #E-recovery {
-    flex: 1;
     display: flex;
     flex-direction: column;
+    max-height: 59%;
+
+    background-color: #1d2327;
+    color : whitesmoke;
+
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    background-color: #ffffff; /* Bleu plus intense */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+    padding: 10px;
+}
+
+#E-recovery-chart {
+    max-height: 90%;
+    max-width: 90%;
 }
 
 
+/* CSS POUR PARTIE TARGET*/
+#C-targets {
+    display: flex;
+    flex-direction: row;
+    max-height: 16em;
+    border-radius: 10px;
+    gap: 10px;
+    /*background-color: #fc00fc;*/
+}
+
+.D-target-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a346e;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 90%;
+    width: 33.3%;
+}
+
+.date, .tracking {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 1.2em;
+}
+
+/* CSS POUR PARTIE PHYSIQUE*/
 #B-physical {
-    flex: 2;
-    background-color: #0d47a1; /* Bleu roi */
+    flex:2;
+    max-height: 60em;
+    background-color: #0a346e;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px; /* Plus d'espace pour l'aération */
-    border-radius: 12px; /* Bords légèrement plus arrondis */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Ombre plus douce */
-    gap: 1.5%;
+    padding: 10px; /* Plus d'espace pour l'aération */
+    border-radius: 10px; /* Bords légèrement plus arrondis */
+    gap: 10px;
 }
 
 #C-movement {
@@ -132,8 +202,8 @@ body {
     flex-direction: column;
     justify-content: center; /* Centre le contenu verticalement */
     align-items: center; /* Centre horizontalement */
-    background-color: #0b3b83; /* Bleu plus intense */
-    border-radius: 8px;
+    background-color: #072754;
+    border-radius: 10px;
     text-align: center;
     overflow: hidden; /* Empêche les dépassements */
 }
@@ -144,44 +214,128 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
-    gap: 3%;
-    overflow: hidden; /* Assure que rien ne dépasse */
+    gap: 10px;
+    overflow:scroll; /* Assure que rien ne dépasse */
 }
 
-canvas {
-    max-height: 100%;
-    max-width: 75%;
-}
 
 #E-quality, #E-phy-text {
     color: #e3f2fd;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
 }
 
 #F-game {
-    color :  #0a346e
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
 }
-
-
-
-
 
 
 /* Responsivité */
 @media (max-width: 768px) {
+    * {
+        box-sizing: border-box;
+    }
+    #body {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
     #A-base {
         flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    #AB-top {
+        flex-direction: column;
+        align-items: center;
+        height: 400px;
+        gap: 10px;
+        padding: 10px;
+    }
+    #AB-bot {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+    #C-info {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    #D-bio {
+        gap: 10px;
+        padding: 10px;
+    }
+    #E-Bio_infos {
+        gap: 10px;
+        padding: 10px;
+    }
+    #D-games_and_recovery {
+        gap: 10px;
+        padding: 10px;
+        width: 100%;
+        max-width: 100%;
+        
+    }
+    #E-games {
+        flex-direction: row;
+        font-size: 10px;
+        gap: 10px;
+    }
+    #E-recovery{
+        flex-direction: column;
+        height: 300px;
+        width: 100%;
+        max-width: 100%;
+        padding : 10px;
+        gap: 10px;
+        overflow: scroll;
+    }
+    #C-targets {
+        flex-direction: row;
+        padding: 10px;
+        gap: 10px;
+    }
+    .D-target-card {
+        display: flex;
+        flex-direction: column;
         height: auto;
+        gap: 10px;
+        padding: 10px;
     }
-
-    #B-main, #B-physical {
-        flex: 1;
+    #B-physical {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        gap: 10px;
     }
-
-    #D-target-card {
-        width: 80%;
+    #C-movement {
+        padding: 10px;
+        gap: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+    #D-phy-stats {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+    #E-quality, #E-phy-text {
+        padding: 10px;
+        gap: 10px;
+    }
+    #F-game {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
     }
 }
-
-

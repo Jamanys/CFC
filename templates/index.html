@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../static/js/bio_selector_names.js"></script>
     <link rel="stylesheet" href="../static/css/test.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="../static/js/bio_get_info.js" defer></script>
     <script src="../static/js/games_match_display.js" defer></script>
     <script src="../static/js/recovery_graph.js" defer></script>
@@ -16,27 +16,30 @@
 </head>
 <body>
     <div id="A-base">
-        <div id="B-main">
-            <div id="C-info">
-                <div id="D-bio">
-                    <select id="E-player-select">
-                        <p>CFC PLAYER SUPERVISOR</p>
-                        <option value="Wesley Fofana">Sélectionner un joueur</option>
-                    </select>
-                    <div id = E-Bio_infos>
-                    </div>
-                </div>
-                <div id="D-games_and_recovery">
-                    <div id="E-games">Games</div>
-                    <div id="E-recovery">
-                        <p>RECOVERY EVOLUTION</p>
-                        <canvas id="E-recovery-chart" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div id="C-targets">targets</div>
+        <div id ="AB-top">
+            <h1 for="E-player-select">CFC PLAYER SUPERVISOR</h1>
+            <select id="E-player-select">
+                <option value="Wesley Fofana" disabled selected>Sélectionner un joueur</option>
+            </select>
         </div>
-        <div id="B-physical"> physical </div>
+        <div id="AB-bot">
+            <div id="B-main">
+                <div id="C-info">
+                    <div id="D-bio">
+                        <div id="E-Bio_infos"></div>
+                    </div>
+                    <div id="D-games_and_recovery">
+                        <div id="E-games">Games</div>
+                        <div id="E-recovery">
+                            <p>RECOVERY EVOLUTION</p>
+                            <canvas id="E-recovery-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div id="C-targets">targets</div>
+            </div>
+            <div id="B-physical"> physical </div>
+        </div>
     </div>
 </body>
 </html>

@@ -184,27 +184,42 @@ function renderGroupedCharts(statsLast30) {
                 ]
             },
             options: {
-                legend: {
-                    labels: {
-                        fontColor: "white",
+                indexAxis: 'y',
+                responsive: true,
+                elements: {
+                    bar: {
+                        borderWidth: 2,
                     }
                 },
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: 'white',
+                            boxWidth: 10
+                        }
+                    },
+                },
                 scales: {
-                    yAxes: [{
+                    x: {
                         ticks: {
-                            fontColor: "white",
-                            fontSize: 10,
+                            color: 'white',
+                            font: {
+                                size: 10
+                            },
+                            beginAtZero: true
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'white',
+                            font: {
+                                size: 10
+                            },
                             stepSize: 0.2,
                             beginAtZero: true
                         }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "white",
-                            fontSize: 10,
-                            beginAtZero: true
-                        }
-                    }]
+                    }
                 }
             }
         });
