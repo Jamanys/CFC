@@ -3,15 +3,15 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #1d2327; /* Blanc cassé */
-    color: #ffffff; /* Texte sombre pour le contraste */
+    background-color:#101517fa;
+    color: #ffffff;
 }
 
 /* Conteneur principal */
 #A-base {
     display: flex;
     flex-direction: column;
-    gap : 1%;
+    gap : 10px;
 }
 
 #AB-top{
@@ -19,9 +19,9 @@ body {
     flex-direction: row;
     justify-content: center;
     align-content: center;
-    padding: 1%;
-    height: 5%;
-    gap: 5%;
+    max-height: 2em;
+    padding: 10px;
+    gap: 10px;
 }
 
 #AB-bot{
@@ -29,15 +29,14 @@ body {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    gap : 3%;
-    padding: 1%;
+    gap : 10px;
+    padding: 10px;
     border-radius: 10px;
-    background-color:#101517;
 }
 
 #E-player-select {
     background-color: white;
-    padding: 8px;
+    padding: 10px;
     border-radius: 10px;
     border: 1px solid black;
     cursor: pointer;
@@ -58,25 +57,24 @@ label {
     flex: 5.5;
     display: flex;
     flex-direction: column;
-    gap: 1%;
+    gap: 10px;
 }
 
 /* Informations */
 #C-info {
     display: flex;
     flex-direction: row;
-    height: 79%;
-    width: 100%;
+    max-height:48em;
     border-radius: 10px;
-    padding: 1%;
-    gap: 1%;
+    gap: 10px;
+    /* background-color: #ff0000; */
 }
 
 #D-bio {
-    flex: 1;
-    background-color: #1d2327;
     display: flex;
     flex-direction: column;
+
+    background-color: #1d2327;
     justify-content: center;
     align-items: center;
     padding: 15px;
@@ -98,7 +96,7 @@ label {
     max-width: 150px;
     height: auto;
     border-radius: 50%;
-    box-shadow: 0 4px 8px rgb(0, 37, 249);
+    box-shadow: 0 4px 8px rgb(255, 255, 255);
     margin-bottom: 10px;
 }
 /* Jeux et récupération */
@@ -106,28 +104,28 @@ label {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 80%;
-    gap: 1%;
+    width: 100%;
+    gap: 10px;
 }
 
 #E-games{
     display: flex;
     flex-direction: row;
-    height: 40%;
+    max-height: 40%;
+    max-width: 100%;
 
     background-color: #1d2327;
     color : whitesmoke;
 
     justify-content: center;
     align-items: center;
-    gap: 10px;
     border-radius: 10px;
 }
 
 #E-recovery {
     display: flex;
     flex-direction: column;
-    height: 60%;
+    max-height: 59%;
 
     background-color: #1d2327;
     color : whitesmoke;
@@ -136,7 +134,12 @@ label {
     align-items: center;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
-    padding: 5%;
+    padding: 10px;
+}
+
+#E-recovery-chart {
+    max-height: 90%;
+    max-width: 90%;
 }
 
 
@@ -144,12 +147,10 @@ label {
 #C-targets {
     display: flex;
     flex-direction: row;
-    height: 19%;
-    width: 100%;
-
+    max-height: 16em;
     border-radius: 10px;
-    padding: 1%;
-    gap: 1%;
+    gap: 10px;
+    /*background-color: #fc00fc;*/
 }
 
 .D-target-card {
@@ -158,8 +159,8 @@ label {
     align-items: center;
     justify-content: center;
     background-color: #0a346e;
-    border-radius: 8px;
-    gap: 2%;
+    border-radius: 10px;
+    gap: 10px;
     padding: 10px;
     text-align: center;
     color: white;
@@ -172,7 +173,7 @@ label {
 .date, .tracking {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .icon {
@@ -182,15 +183,16 @@ label {
 /* CSS POUR PARTIE PHYSIQUE*/
 #B-physical {
     flex:2;
+    max-height: 60em;
     background-color: #0a346e;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1%; /* Plus d'espace pour l'aération */
+    padding: 10px; /* Plus d'espace pour l'aération */
     border-radius: 10px; /* Bords légèrement plus arrondis */
-    gap: 1%;
+    gap: 10px;
 }
 
 #C-movement {
@@ -201,7 +203,7 @@ label {
     justify-content: center; /* Centre le contenu verticalement */
     align-items: center; /* Centre horizontalement */
     background-color: #072754;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
     overflow: hidden; /* Empêche les dépassements */
 }
@@ -212,45 +214,128 @@ label {
     align-items: center;
     width: 100%;
     height: 100%;
-    gap: 3%;
-    overflow: hidden; /* Assure que rien ne dépasse */
+    gap: 10px;
+    overflow:scroll; /* Assure que rien ne dépasse */
 }
 
-canvas {
-    max-height: 100%;
-    max-width: 75%;
-}
 
 #E-quality, #E-phy-text {
     color: #e3f2fd;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
+}
+
+#F-game {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
 }
 
 
 /* Responsivité */
 @media (max-width: 768px) {
-    #body {
-        width: 98%;
+    * {
+        box-sizing: border-box;
     }
+    #body {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
     #A-base {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    #AB-top {
+        flex-direction: column;
+        align-items: center;
+        height: 400px;
+        gap: 10px;
+        padding: 10px;
+    }
+    #AB-bot {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+    #C-info {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    #D-bio {
+        gap: 10px;
+        padding: 10px;
+    }
+    #E-Bio_infos {
+        gap: 10px;
+        padding: 10px;
+    }
+    #D-games_and_recovery {
+        gap: 10px;
+        padding: 10px;
+        width: 100%;
+        max-width: 100%;
+        
+    }
+    #E-games {
+        flex-direction: row;
+        font-size: 10px;
+        gap: 10px;
+    }
+    #E-recovery{
+        flex-direction: column;
+        height: 300px;
+        width: 100%;
+        max-width: 100%;
+        padding : 10px;
+        gap: 10px;
+        overflow: scroll;
+    }
+    #C-targets {
+        flex-direction: row;
+        padding: 10px;
+        gap: 10px;
+    }
+    .D-target-card {
         display: flex;
         flex-direction: column;
         height: auto;
+        gap: 10px;
+        padding: 10px;
     }
-
-    #B-main, #B-physical {
+    #B-physical {
+        display: flex;
+        flex-direction: column;
         width: 100%;
-        display: flex;
-        flex-direction: column;
+        max-width: 100%;
+        padding: 10px;
+        gap: 10px;
     }
-
-    #D-target-card {
-        width: 80%;
-        display: flex;
+    #C-movement {
+        padding: 10px;
+        gap: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+    #D-phy-stats {
         flex-direction: column;
-
+        padding: 10px;
+        gap: 10px;
+    }
+    #E-quality, #E-phy-text {
+        padding: 10px;
+        gap: 10px;
+    }
+    #F-game {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
     }
 }
-
-

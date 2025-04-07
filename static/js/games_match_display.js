@@ -8,6 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
+const teamLogos = {
+    SOU: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Southampton%20FC.png",
+    LEI: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Leicester%20City.png",
+    ARS: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Arsenal%20FC.png",
+    FCK: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/Denmark%20-%20Superliga/FC%20Copenhagen.png",
+    TOT: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Tottenham%20Hotspur.png",
+    BRE: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Brentford%20FC.png",
+    AVL: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Aston%20Villa.png"
+};
+
+
 function match_get_info(select){
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
     const player_id = selectedPlayer.pid
@@ -67,7 +78,9 @@ function match_get_info(select){
                 // Extraire les valeurs nécessaires : opposition_code, date et distance
                 const oppositionCode = columns[header.indexOf("opposition_code")];
                 const dateStr = columns[header.indexOf("date")];
-                const distance = parseFloat(columns[header.indexOf("distance")]) / 1000;  // Convertir en km et arrondir
+                const distance = parseFloat(columns[header.indexOf("distance")]) / 1000;
+                const distance_over_27 = parseFloat(columns[header.indexOf("distance_over_27")]);
+                const nbAccel = parseFloat(columns[header.indexOf("accel_decel_over_3_5")]);
 
                 // Formater la date au format "dd/mm"
                 const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
@@ -76,9 +89,11 @@ function match_get_info(select){
                 // Ajouter le contenu de chaque match
                 output += `
                 <div id="F-game">
-                    <p><strong>Opposition :</strong> ${oppositionCode}</p>
-                    <p><strong>Date :</strong> ${formattedDate}</p>
-                    <p><strong>Distance :</strong> ${distance.toFixed(1)} km</p>
+                    <img src="${teamLogos[oppositionCode]}" alt="${oppositionCode}" style="height: 50px;">
+                    <p>${formattedDate}</p>
+                    <p><strong>Distance :</strong> ${distance.toFixed(1)} km 🏃</p>
+                    <p><strong>Dist <27km/h :</strong> ${distance_over_27.toFixed(0)}m ⚡️</p>
+                    <p><strong>nb Accel:</strong> ${nbAccel.toFixed(0)} 🐆</p>
                 </div>
                 `;
             });

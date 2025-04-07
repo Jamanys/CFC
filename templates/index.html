@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../static/js/bio_selector_names.js"></script>
     <link rel="stylesheet" href="../static/css/test.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="../static/js/bio_get_info.js" defer></script>
     <script src="../static/js/games_match_display.js" defer></script>
     <script src="../static/js/recovery_graph.js" defer></script>
@@ -17,7 +17,7 @@
 <body>
     <div id="A-base">
         <div id ="AB-top">
-            <label for="E-player-select">CFC PLAYER SUPERVISOR</label>
+            <h1 for="E-player-select">CFC PLAYER SUPERVISOR</h1>
             <select id="E-player-select">
                 <option value="Wesley Fofana" disabled selected>Sélectionner un joueur</option>
             </select>
@@ -32,7 +32,7 @@
                         <div id="E-games">Games</div>
                         <div id="E-recovery">
                             <p>RECOVERY EVOLUTION</p>
-                            <canvas id="E-recovery-chart" width="400" height="200"></canvas>
+                            <canvas id="E-recovery-chart"></canvas>
                         </div>
                     </div>
                 </div>

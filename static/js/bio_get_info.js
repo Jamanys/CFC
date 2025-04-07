@@ -19,8 +19,8 @@ function load_data(select,bioInfoDiv){
             <h3>${selectedPlayer.fullName}</h3>
             <img src="${selectedPlayer.url}" alt="${selectedPlayer.surname} Picture" class="player-img">
             <p>Position : ${selectedPlayer.position}</p>
-            <p>Taille : ${selectedPlayer.height} cm</p>
-            <p>Poids : ${selectedPlayer.weight} kg</p>
+            <p>Height : ${selectedPlayer.height} cm</p>
+            <p>Weight : ${selectedPlayer.weight} kg</p>
         `;
     } else {
         bioInfoDiv.innerHTML = "";
