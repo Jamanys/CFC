@@ -11,6 +11,7 @@
     <script src="../static/js/recovery_graph.js" defer></script>
     <script src="../static/js/physic_get_info.js"defer></script>
     <script src="../static/js/target_get_info.js"defer></script>
+    <script src="../static/js/canva-clean.js"defer></script>
     
     <title>CFC</title>
 </head>
@@ -29,10 +30,12 @@
                         <div id="E-Bio_infos"></div>
                     </div>
                     <div id="D-games_and_recovery">
-                        <div id="E-games">Games</div>
+                        <div id="E-games"></div>
                         <div id="E-recovery">
-                            <p>RECOVERY EVOLUTION</p>
-                            <canvas id="E-recovery-chart"></canvas>
+                            <h1>RECOVERY EVOLUTION (Last 1O days)</h1>
+                            <div id="E-recovery-chart-container">
+                                <canvas id="F-recovery-chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>

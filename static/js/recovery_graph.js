@@ -86,10 +86,6 @@ function recovery_get_info(select){
 function updateChart(labels, emboss, subjective, msk, sleep, bio) {
 const ctx = document.getElementById("E-recovery-chart").getContext("2d");
 
-if (window.recoveryChart) {
-    window.recoveryChart.destroy(); // Détruire l'ancien graphique avant d'en créer un nouveau
-}
-
 window.recoveryChart = new Chart(ctx, {
     type: "line",
     data: {
@@ -102,36 +98,49 @@ window.recoveryChart = new Chart(ctx, {
             { label: "Bio", data: bio, borderColor: "#9966FF", fill: false }
         ]
     },
-
     options: {
         responsive: true,
         maintainAspectRatio: false,
-        legend: {
-            labels: {
-                fontColor: "white",
+        plugins: {
+            legend: {
+                labels: {
+                    color: "white" // légende blanche
+                }
+            },
+            title: {
+                color: "white"
+            },
+            tooltip: {
+                bodyColor: "white",
+                titleColor: "white"
             }
         },
         scales: {
-            x: { title: { display: true, text: "Date" } },
-            y: { title: { display: true, text: "Score" }},
-            yAxes: [{
+            x: {
                 ticks: {
-                    fontColor: "white",
-                    fontSize: 10,
-                    stepSize: 0.2,
-                    beginAtZero: true
+                    color: "white" // texte des ticks en blanc
+                },
+                title: {
+                    display: true,
+                    text: "Date",
+                    color: "white" // titre axe x en blanc
                 }
-            }],
-            xAxes: [{
+            },
+            y: {
                 ticks: {
-                    fontColor: "white",
-                    fontSize: 10,
-                    beginAtZero: true
+                    color: "white"
+                },
+                title: {
+                    display: true,
+                    text: "Score",
+                    color: "white"
                 }
-            }]
+            }
         }
     }
 });
+
+
 }
 
 // Fonction pour parser une date au format "dd/mm/yyyy"
