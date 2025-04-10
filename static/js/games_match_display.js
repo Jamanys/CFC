@@ -71,7 +71,8 @@ function match_get_info(select){
             const mergedData = beforeDate.concat(afterDate ? [afterDate] : []);
 
             // Afficher les matchs dans la div
-            let output = ``
+            let output = `<div><h1>GAMES : </h1></div>
+            <div id="F-game-cards">  `
             mergedData.forEach(line => {
                 const columns = line.split(",");
 
@@ -88,7 +89,7 @@ function match_get_info(select){
 
                 // Ajouter le contenu de chaque match
                 output += `
-                <div id="F-game">
+                <div id="G-game">
                     <img src="${teamLogos[oppositionCode]}" alt="${oppositionCode}" style="height: 50px;">
                     <p>${formattedDate}</p>
                     <p><strong>Distance :</strong> ${distance.toFixed(1)} km 🏃</p>
@@ -97,6 +98,7 @@ function match_get_info(select){
                 </div>
                 `;
             });
+        output += `</div>`;
         if (mergedData.length === 0) {
             output = "<p>No game played or planed for this player</p>";
         }
