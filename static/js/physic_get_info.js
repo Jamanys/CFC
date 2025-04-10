@@ -168,7 +168,7 @@ function renderGroupedCharts(statsLast30) {
                 labels: categories,
                 datasets: [
                     {
-                        label: "Moyenne (%)",
+                        label: "Mean (%)",
                         data: avgValues,
                         backgroundColor: "rgba(54, 162, 235, 0.6)",
                         borderColor: "rgba(54, 162, 235, 1)",
