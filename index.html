@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/test.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="../static/css/test.css">
     <title>CFC</title>
 </head>
 <body>
     <div id="A-base">
         <div id="AB-top">
-            <h1 id="top-title">CFC PLAYER SUPERVISOR</h1>
+            <div id ="top-div-title">
+                <h1 id="top-title">CFC PLAYER SUPERVISOR</h1>
+            </div>
             <div id="top-select-wrapper">
                 <select id="E-player-select">
                     <option value="Wesley Fofana" disabled selected>Sélectionner un joueur</option>
@@ -34,9 +36,15 @@
                         <div id="E-match_stats">
                             <h1>LAST 4 GAMES STATS</h1>
                             <div id="F-match_stats-canvas">
-                                <canvas id="distanceChart"></canvas>
-                                <canvas id="accelChart"></canvas>
-                                <canvas id="hrChart"></canvas>
+                                <div id="G-canva_container">
+                                    <canvas id="distanceChart"></canvas>
+                                </div>
+                                <div id="G-canva_container">
+                                    <canvas id="accelChart"></canvas>
+                                </div>
+                                <div id="G-canva_container">
+                                    <canvas id="hrChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>

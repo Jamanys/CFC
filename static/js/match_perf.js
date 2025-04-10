@@ -119,6 +119,7 @@ function match_get_graphs(select) {
                 }]
             },
             options: {
+                responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     title: {
@@ -169,6 +170,7 @@ function match_get_graphs(select) {
                 }]
             },
             options: {
+                responsive: true,
                 maintainAspectRatio: false,
                 plugins: { 
                     title: { 
@@ -221,6 +223,7 @@ function match_get_graphs(select) {
                 }]
             },
             options: {
+                responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     title: {

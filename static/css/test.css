@@ -284,108 +284,179 @@ label {
 }
 
 
-/* Responsivité */
+/* ======= MOBILE RESPONSIVE CSS ======= */
 @media (max-width: 768px) {
-    * {
-        box-sizing: border-box;
+    html, body,#A-base {
+        overflow: auto !important;
+        height: auto !important;
+        max-height: none !important;
     }
-    #body {
-        padding: 10px;
+
+    #AB-top {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        align-content: center;
+        width: auto !important;
+        height: 120px !important;
+        padding: 1rem;
+    }
+
+    #top-div-title, #top-select-wrapper {
+        min-width: 100%;
+        min-height: 50%;
+    }
+    
+    #top-title {
+        font-size: 15px; /* Adjust as needed */
+    }
+    
+    #E-player-select {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    #AB-bot {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1rem;
+        overflow:visible !important;
+        height: auto !important;
+        max-height: none !important;
+        align-items: center;
+    }
+
+    #B-main {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 98%!important;
+        max-width: 98%!important;
+    }
+
+    #B-physical {
+        max-width: 100%!important;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #C-targets{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        max-width: 100%;
+        height: 6rem;
+        align-items: center;
+    }
+
+    #C-info {
+        max-width: 100% !important;
+        height: auto;
         display: flex;
         flex-direction: column;
     }
 
-    #A-base {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-    #AB-top {
-        flex-direction: column;
-        align-items: center;
-        height: 400px;
-        gap: 10px;
-        padding: 10px;
-    }
-    #AB-bot {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 10px;
-    }
-    #C-info {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-    #D-bio {
-        gap: 10px;
-        padding: 10px;
-    }
-    #E-Bio_infos {
-        gap: 10px;
-        padding: 10px;
+    #D-bio{
+        width: 100%;
+        max-width: 100%;
     }
     #D-games_and_recovery {
-        gap: 10px;
-        padding: 10px;
-        width: 100%;
-        max-width: 100%;
-        
-    }
-    #E-games {
-        flex-direction: row;
-        font-size: 10px;
-        row-gap: 10px;
-    }
-    #E-recovery{
+        display: flex;
         flex-direction: column;
-        height: 300px;
         width: 100%;
         max-width: 100%;
-        padding : 10px;
-        gap: 10px;
-        overflow: scroll;
+        gap: 1rem;
     }
-    #C-targets {
+
+    #E-player_picture,#E-games {
+        text-align: center;
+        width: auto;
+    }
+    #E-player_picture .player-img {
+        max-width: 150px;
+        height: auto;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgb(255, 255, 255);
+        margin-bottom: 10px;
+    }
+
+    .player-img {
+        width: 80%;
+        height: auto;
+        max-width: 200px;
+        border-radius: 10px;
+    }
+
+    #F-game-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    #G-game {
+        text-align: center;
+        width: 30%;
+    }
+
+    #E-recovery-chart-container {
+        overflow:scroll;
+        display: flex;
         flex-direction: row;
-        padding: 10px;
-        gap: 10px;
+        height: 300px;
+        gap : 0.5rem;
     }
-    .D-target-card {
+
+    #E-match_stats {
         display: flex;
         flex-direction: column;
         height: auto;
-        gap: 10px;
-        padding: 10px;
+        width: auto;
     }
-    #B-physical {
+
+    #F-match_stats-canvas {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        max-width: 100%;
-        padding: 10px;
         gap: 10px;
+        justify-content: space-between;
     }
+    
+    #G-canva_container {
+        max-width: 80%;
+        width: 500px;
+        max-height:90% ;
+        height: 200px;
+    }
+    
+    #G-canva_container canvas {
+        width: 100% !important;
+        max-width: 100%;
+        height: 100% !important;
+        max-height: 100%;
+    }
+    
+
+    #D-target-card {
+        background-color: #034694;
+        border-radius: 10px;
+        font-size: 9px;
+        padding: 1rem;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
     #C-movement {
-        padding: 10px;
-        gap: 10px;
-        width: 100%;
-        max-width: 100%;
+        width: 48%;
+        height: auto;
     }
-    #D-phy-stats {
-        flex-direction: column;
-        padding: 10px;
-        gap: 10px;
-    }
-    #E-quality, #E-phy-text {
-        padding: 10px;
-        gap: 10px;
-    }
-    #G-game {
-        flex-direction: column;
-        padding-left: 5px;
-        padding-right: 5px;
-        gap: 1px;
+
+    #D-phy-stats canvas {
+        width: 100% !important;
+        height: 100px !important;
     }
 }
+/* ======= END OF MOBILE RESPONSIVE CSS ======= */

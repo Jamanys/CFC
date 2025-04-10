@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
 function thestufftodo(select){
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
     if (!selectedPlayer) return; // Sécurité si le joueur n'existe pas
