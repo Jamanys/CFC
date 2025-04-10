@@ -19,10 +19,10 @@ function thestufftodo(select){
     // Définition des dates
     const today = new Date(2025, 2, 13);  // 13/03/2025 (Mois - 1 car JS commence à 0)
     const last30Days = new Date(today);
-    last30Days.setDate(today.getDate() - 30);
+    last30Days.setDate(today.getDate() - 60);
 
     const prev30Days = new Date(last30Days);
-    prev30Days.setDate(last30Days.getDate() - 30);
+    prev30Days.setDate(last30Days.getDate() - 60);
 
     fetch("../static/csv/CFC Physical Capability Data_.csv")
         .then(response => response.text())
@@ -170,22 +170,23 @@ function renderGroupedCharts(statsLast30) {
                     {
                         label: "Mean (%)",
                         data: avgValues,
-                        backgroundColor: "rgba(54, 162, 235, 0.6)",
-                        borderColor: "rgba(54, 162, 235, 1)",
-                        borderWidth: 2,
+                        backgroundColor: "#a9b0d4",
+                        borderColor: "#a9b0d4",
+                        borderWidth:1 ,
                     },
                     {
                         label: "Max (%)",
                         data: maxValues,
-                        backgroundColor: "rgba(255, 99, 132, 0.6)",
-                        borderColor: "rgba(255, 99, 132, 1)",
-                        borderWidth: 2
+                        backgroundColor: "#034694",
+                        borderColor: "#034694",
+                        borderWidth: 1
                     }
                 ]
             },
             options: {
-                indexAxis: 'y',
+                indexAxis: 'x',
                 responsive: true,
+                maintainAspectRatio: false,
                 elements: {
                     bar: {
                         borderWidth: 2,
@@ -196,7 +197,10 @@ function renderGroupedCharts(statsLast30) {
                         position: 'right',
                         labels: {
                             color: 'white',
-                            boxWidth: 10
+                            boxWidth: 2,
+                            font: {
+                                size: 7
+                            }
                         }
                     },
                 },
@@ -205,7 +209,7 @@ function renderGroupedCharts(statsLast30) {
                         ticks: {
                             color: 'white',
                             font: {
-                                size: 10
+                                size: 9
                             },
                             beginAtZero: true
                         }

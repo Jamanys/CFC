@@ -1,29 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
     const select = document.getElementById("E-player-select");
-    const bioInfoDiv = document.getElementById("E-Bio_infos");
+    const bioPict = document.getElementById("E-player_picture");
+
     setTimeout(function (){
-        load_data(select,bioInfoDiv)
+        load_data(select,bioPict)
     }, 50);
 
     select.addEventListener("change", function () {
-        load_data(select,bioInfoDiv)
+        load_data(select,bioPict)
     });
 });
 
 
-function load_data(select,bioInfoDiv){
+function load_data(select,bioPict){
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
     
     if (selectedPlayer) {
-        bioInfoDiv.innerHTML = `
-            <h3>${selectedPlayer.fullName}</h3>
-            <img src="${selectedPlayer.url}" alt="${selectedPlayer.surname} Picture" class="player-img">
-            <p>Position : ${selectedPlayer.position}</p>
-            <p>Height : ${selectedPlayer.height} cm</p>
-            <p>Weight : ${selectedPlayer.weight} kg</p>
+        bioPict.innerHTML = `
+        <h3>${selectedPlayer.fullName}</h3>
+        <img src="${selectedPlayer.url}" alt="${selectedPlayer.surname} Picture" class="player-img"></img>
         `;
     } else {
-        bioInfoDiv.innerHTML = "";
+        bioPicts.innerHTML = "";
     }
 }
 

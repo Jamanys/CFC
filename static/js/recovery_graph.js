@@ -16,7 +16,7 @@ function recovery_get_info(select){
     const player_id = selectedPlayer.pid;
     const today_day = new Date("2025-03-13");
     const tenDaysAgo = new Date(today_day);
-    tenDaysAgo.setDate(today_day.getDate() - 20);
+    tenDaysAgo.setDate(today_day.getDate() - 7);
 
     fetch("../static/csv/CFC Recovery status Data.csv")
     .then(response => response.text())
@@ -52,7 +52,7 @@ function recovery_get_info(select){
         // Regrouper les données par jour et par métrique
         const groupedData = {};
         filteredData.forEach(({ date, metric, value }) => {
-            const dateStr = date.toISOString().split("T")[0];
+            const dateStr = `${String(date.getMonth()).padStart(2, '0')}-${String(date.getDate() + 1).padStart(2, '0')}`;
             if (!groupedData[dateStr]) groupedData[dateStr] = {};
             groupedData[dateStr][metric] = value;
         });
@@ -91,11 +91,11 @@ window.recoveryChart = new Chart(ctx, {
     data: {
         labels: labels,
         datasets: [
-            { label: "Emboss", data: emboss, borderColor: "#FF6384", fill: false },
-            { label: "Subjective", data: subjective, borderColor: "#36A2EB", fill: false },
-            { label: "Muscles", data: msk, borderColor: "#FFCE56", fill: false },
-            { label: "Sleep", data: sleep, borderColor: "#4BC0C0", fill: false },
-            { label: "Bio", data: bio, borderColor: "#9966FF", fill: false }
+            { label: "Emboss", data: emboss, borderColor: "#dba111", fill: "#FF6384",borderWidth:2,pointRadius: 1},
+            { label: "Subjective", data: subjective, borderColor: "#d1d3d4", fill: '#36A2EB',borderWidth: 2,pointRadius: 1 },
+            { label: "Muscles", data: msk, borderColor: "#034694", fill: "#FFCE56",borderWidth: 2,pointRadius: 1 },
+            { label: "Sleep", data: sleep, borderColor: "#6a7ab5", fill: "#4BC0C0" ,borderWidth: 2,pointRadius: 1 },
+            { label: "Bio", data: bio, borderColor: "#ee242c", fill: "#9966FF" ,borderWidth: 2,pointRadius: 1 }
         ]
     },
     options: {
@@ -104,8 +104,13 @@ window.recoveryChart = new Chart(ctx, {
         plugins: {
             legend: {
                 labels: {
-                    color: "white" // légende blanche
-                }
+                    color: 'white',
+                    boxWidth: 2,
+                    font: {
+                        size: 12
+                    }
+                },
+                position :'bottom',
             },
             title: {
                 color: "white"

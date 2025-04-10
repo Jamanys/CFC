@@ -16,6 +16,7 @@ const teamLogos = {
     TOT: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Tottenham%20Hotspur.png",
     BRE: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Brentford%20FC.png",
     AVL: "https://raw.githubusercontent.com/luukhopman/football-logos/master/logos/England%20-%20Premier%20League/Aston%20Villa.png"
+    /* put other team logos here */
 };
 
 
@@ -43,35 +44,34 @@ function match_get_info(select){
             const beforeDate = filteredLines.filter(line => {
                 const dateStr = line.split(",")[header.indexOf("date")];
                 const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
-                const date = new Date(year, month, day);
+                const date = new Date(year, month, day);  // Soustraction de 1 au mois (car les mois commencent à 0 en JavaScript)
                 return date < new Date("2025-04-13");
             })
             .sort((a, b) => {
                 const dateStrA = a.split(",")[header.indexOf("date")];
                 const [dayA, monthA, yearA] = dateStrA.split("/").map(num => parseInt(num, 10));
-                const dateA = new Date(yearA, monthA, dayA);
+                const dateA = new Date(yearA, monthA - 1, dayA);  // Soustraction de 1 au mois pour la conversion
 
                 const dateStrB = b.split(",")[header.indexOf("date")];
                 const [dayB, monthB, yearB] = dateStrB.split("/").map(num => parseInt(num, 10));
-                const dateB = new Date(yearB, monthB, dayB);
+                const dateB = new Date(yearB, monthB - 1, dayB);  // Soustraction de 1 au mois pour la conversion
 
                 return dateA - dateB;  // Trie du plus ancien au plus récent
             })
-            .slice(-4);  // Récupérer les 4 premiers matchs
+            .slice(-3);  // Récupérer les 3 derniers matchs avant la date limite
 
             // Récupérer le premier match après la date limite
-            const afterDate = filteredLines.find(line => {
+            const afterDate = filteredLines.filter(line => {
                 const dateStr = line.split(",")[header.indexOf("date")];
                 const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
-                const date = new Date(year, month, day); // mois commence à 0 en JavaScript
+                const date = new Date(year, month , day);  // Soustraction de 1 au mois pour la conversion
                 return date > new Date("2025-04-13");
-            });
+            }).slice(0, 3);  // Récupérer le premier match après la date limite
+            const mergedData = beforeDate.concat(afterDate);
 
-            // Fusionner les deux ensembles de données : avant et après la date
-            const mergedData = beforeDate.concat(afterDate ? [afterDate] : []);
 
             // Afficher les matchs dans la div
-            let output = `<div><h1>GAMES : </h1></div>
+            let output = `<div id="F-game-title"><h1>GAMES : </h1></div>
             <div id="F-game-cards">  `
             mergedData.forEach(line => {
                 const columns = line.split(",");
@@ -92,9 +92,6 @@ function match_get_info(select){
                 <div id="G-game">
                     <img src="${teamLogos[oppositionCode]}" alt="${oppositionCode}" style="height: 50px;">
                     <p>${formattedDate}</p>
-                    <p><strong>Distance :</strong> ${distance.toFixed(1)} km 🏃</p>
-                    <p><strong>Dist <27km/h :</strong> ${distance_over_27.toFixed(0)}m ⚡️</p>
-                    <p><strong>nb Accel:</strong> ${nbAccel.toFixed(0)} 🐆</p>
                 </div>
                 `;
             });

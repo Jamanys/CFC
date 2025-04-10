@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="../static/js/bio_get_info.js" defer></script>
     <script src="../static/js/games_match_display.js" defer></script>
+    <script src="../static/js/match_perf.js" defer></script>
     <script src="../static/js/recovery_graph.js" defer></script>
     <script src="../static/js/physic_get_info.js"defer></script>
     <script src="../static/js/target_get_info.js"defer></script>
@@ -16,24 +17,34 @@
 </head>
 <body>
     <div id="A-base">
-        <div id ="AB-top">
-            <h1 for="E-player-select">CFC PLAYER SUPERVISOR</h1>
-            <select id="E-player-select">
-                <option value="Wesley Fofana" disabled selected>Sélectionner un joueur</option>
-            </select>
+        <div id="AB-top">
+            <h1 id="top-title">CFC PLAYER SUPERVISOR</h1>
+            <div id="top-select-wrapper">
+                <select id="E-player-select">
+                    <option value="Wesley Fofana" disabled selected>Sélectionner un joueur</option>
+                </select>
+            </div>
         </div>
         <div id="AB-bot">
             <div id="B-main">
                 <div id="C-info">
                     <div id="D-bio">
-                        <div id="E-Bio_infos"></div>
+                        <div id="E-player_picture"></div>
+                        <div id="E-games"></div>
                     </div>
                     <div id="D-games_and_recovery">
-                        <div id="E-games"></div>
                         <div id="E-recovery">
-                            <h1>RECOVERY EVOLUTION (Last 1O days)</h1>
+                            <h1>RECOVERY EVOLUTION (Last 7 days)</h1>
                             <div id="E-recovery-chart-container">
                                 <canvas id="F-recovery-chart"></canvas>
+                            </div>
+                        </div>
+                        <div id="E-match_stats">
+                            <h1>LAST 4 GAMES STATS</h1>
+                            <div id="F-match_stats-canvas">
+                                <canvas id="distanceChart"></canvas>
+                                <canvas id="accelChart"></canvas>
+                                <canvas id="hrChart"></canvas>
                             </div>
                         </div>
                     </div>
