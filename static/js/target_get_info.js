@@ -65,7 +65,7 @@ function get_target_info(select){
             else if (row.tracking === "Miss") trackingIcon = "❌";
 
             return `
-                <div class="D-target-card">
+                <div id="D-target-card">
                     <p class="target">${row.target}</p>
                     <p class="date"><span class="icon">⏰ :</span> ${formattedDate}</p>
                     <p class="tracking">${trackingIcon} ${row.tracking}</p>
