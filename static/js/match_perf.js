@@ -1,3 +1,6 @@
+let statchart1;
+let statchart2;
+let statchart3;
 document.addEventListener("DOMContentLoaded", () => {
     const select = document.getElementById("E-player-select");
     setTimeout(function (){
@@ -56,6 +59,16 @@ function match_get_stats(select) {
 }
 
 function match_get_graphs(select) {
+
+    if (statchart1) {
+        statchart1.destroy();
+    }
+    if (statchart2) {
+        statchart2.destroy();
+    }
+    if (statchart3) {
+        statchart3.destroy();
+    }
     match_get_stats(select).then(({ header, beforeDate }) => {
         // Utilisation du header et des matchs filtrés (beforeDate)
         const sums = {
@@ -95,7 +108,7 @@ function match_get_graphs(select) {
         });
 
         // Création des graphiques
-        new Chart(document.getElementById("distanceChart"), {
+        statchart1 = new Chart(document.getElementById("distanceChart"), {
             type: "bar",
             data: {
                 labels: ["- 21km/h", ">21km/h", ">24km/h", " + 27km/h"],
@@ -145,7 +158,7 @@ function match_get_graphs(select) {
                 }}
         });
 
-        new Chart(document.getElementById("accelChart"), {
+        statchart2 = new Chart(document.getElementById("accelChart"), {
             type: "bar",
             data: {
                 labels: [">2.5m/s²", ">3.5m/s²", ">4.5m/s²"],
@@ -197,7 +210,7 @@ function match_get_graphs(select) {
             },
         });
 
-        new Chart(document.getElementById("hrChart"), {
+        statchart3 = new Chart(document.getElementById("hrChart"), {
             type: "bar",
             data: {
                 labels: ["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"],

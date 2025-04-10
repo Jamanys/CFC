@@ -1,3 +1,4 @@
+let recoveryChart;
 document.addEventListener("DOMContentLoaded", () => {
     const select = document.getElementById("E-player-select");
     setTimeout(function (){
@@ -49,7 +50,6 @@ function recovery_get_info(select){
             return { date, metric, value };
         }).filter(item => item !== null);
 
-        // Regrouper les données par jour et par métrique
         const groupedData = {};
         filteredData.forEach(({ date, metric, value }) => {
             const dateStr = `${String(date.getMonth()).padStart(2, '0')}-${String(date.getDate() + 1).padStart(2, '0')}`;
@@ -73,94 +73,92 @@ function recovery_get_info(select){
             if ((groupedData[date]["msk_joint_range_baseline_composite"] !== undefined)) {
                 lastmskJ = groupedData[date]["msk_joint_range_baseline_composite"];
             }
-            lastmsk = (lastmskL + lastmskJ) / 2 || null; // Mise à jour si une valeur existe
-            return lastmsk; // Utilise la dernière valeur connue
+            lastmsk = (lastmskL + lastmskJ) / 2 || null;
+            return lastmsk;
         });
 
-        // Mettre à jour le graphique
         updateChart(labels, emboss, subjective, msk, sleep, bio);
     });
 };
 
-// Fonction pour initialiser et mettre à jour le graphique
 function updateChart(labels, emboss, subjective, msk, sleep, bio) {
-const ctx = document.getElementById("F-recovery-chart").getContext("2d");
+    const ctx = document.getElementById("F-recovery-chart").getContext("2d");
 
-window.recoveryChart = new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: labels,
-        datasets: [
-            { label: "Emboss", data: emboss, borderColor: "#dba111", fill: "#FF6384",borderWidth:2,pointRadius: 1},
-            { label: "Subjective", data: subjective, borderColor: "#d1d3d4", fill: '#36A2EB',borderWidth: 2,pointRadius: 1 },
-            { label: "Muscles", data: msk, borderColor: "#034694", fill: "#FFCE56",borderWidth: 2,pointRadius: 1 },
-            { label: "Sleep", data: sleep, borderColor: "#6a7ab5", fill: "#4BC0C0" ,borderWidth: 2,pointRadius: 1 },
-            { label: "Bio", data: bio, borderColor: "#ee242c", fill: "#9966FF" ,borderWidth: 2,pointRadius: 1 }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                labels: {
-                    color: 'white',
-                    boxWidth: 2,
-                    font: {
-                        size: 12
-                    }
-                },
-                position :'bottom',
-            },
-            title: {
-                color: "white"
-            },
-            tooltip: {
-                bodyColor: "white",
-                titleColor: "white"
-            }
+    if (recoveryChart) {
+        recoveryChart.destroy();
+    }
+
+    recoveryChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [
+                { label: "Emboss", data: emboss, borderColor: "#dba111", fill: "#FF6384",borderWidth:2,pointRadius: 1},
+                { label: "Subjective", data: subjective, borderColor: "#d1d3d4", fill: '#36A2EB',borderWidth: 2,pointRadius: 1 },
+                { label: "Muscles", data: msk, borderColor: "#034694", fill: "#FFCE56",borderWidth: 2,pointRadius: 1 },
+                { label: "Sleep", data: sleep, borderColor: "#6a7ab5", fill: "#4BC0C0" ,borderWidth: 2,pointRadius: 1 },
+                { label: "Bio", data: bio, borderColor: "#ee242c", fill: "#9966FF" ,borderWidth: 2,pointRadius: 1 }
+            ]
         },
-        scales: {
-            x: {
-                ticks: {
-                    color: "white" // texte des ticks en blanc
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white',
+                        boxWidth: 2,
+                        font: {
+                            size: 12
+                        }
+                    },
+                    position :'bottom',
                 },
                 title: {
-                    display: true,
-                    text: "Date",
-                    color: "white" // titre axe x en blanc
+                    color: "white"
+                },
+                tooltip: {
+                    bodyColor: "white",
+                    titleColor: "white"
                 }
             },
-            y: {
-                ticks: {
-                    color: "white"
+            scales: {
+                x: {
+                    ticks: {
+                        color: "white" // texte des ticks en blanc
+                    },
+                    title: {
+                        display: true,
+                        text: "Date",
+                        color: "white" // titre axe x en blanc
+                    }
                 },
-                title: {
-                    display: true,
-                    text: "Score",
-                    color: "white"
+                y: {
+                    ticks: {
+                        color: "white"
+                    },
+                    title: {
+                        display: true,
+                        text: "Score",
+                        color: "white"
+                    }
                 }
             }
         }
-    }
-});
-
-
+    });
 }
 
-// Fonction pour parser une date au format "dd/mm/yyyy"
 function parseDate(dateStr) {
-const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
-return new Date(year, month - 1, day);
-}
-
-function fillMissingValues(labels, groupedData, metric) {
-let lastValue = null;
-return labels.map(date => {
-    if (groupedData[date] && groupedData[date][metric] !== undefined) {
-        lastValue = groupedData[date][metric]; // Mise à jour si une valeur existe
+    const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
+    return new Date(year, month - 1, day);
     }
-    return lastValue; // Utilise la dernière valeur connue
-});
 
+    function fillMissingValues(labels, groupedData, metric) {
+    let lastValue = null;
+    return labels.map(date => {
+        if (groupedData[date] && groupedData[date][metric] !== undefined) {
+            lastValue = groupedData[date][metric];
+        }
+        return lastValue;
+    });
 }
