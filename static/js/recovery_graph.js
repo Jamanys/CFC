@@ -84,7 +84,7 @@ function recovery_get_info(select){
 
 // Fonction pour initialiser et mettre à jour le graphique
 function updateChart(labels, emboss, subjective, msk, sleep, bio) {
-const ctx = document.getElementById("E-recovery-chart").getContext("2d");
+const ctx = document.getElementById("F-recovery-chart").getContext("2d");
 
 window.recoveryChart = new Chart(ctx, {
     type: "line",
