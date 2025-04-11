@@ -262,17 +262,27 @@ label {
     width: 100%;
     height: 100%;
 }
+
 #F-match_stats-canvas {
     display: flex;
     flex-direction: row;
-    height: 90%;
-    width: 100%;
-}
-#F-match_stats-canvas canvas {
-    max-width: 33%; /* S'assure que les graphiques ne dépassent pas la largeur de leur conteneur */
-    max-height: 90%; /* S'assure que les graphiques ne dépassent pas la hauteur de leur conteneur */
+    gap: 10px;
+    justify-content: space-between;
 }
 
+#G-canva_container {
+    max-width: 80%;
+    width: 500px;
+    max-height:90% ;
+    height: 200px;
+}
+
+#G-canva_container canvas {
+    width: 100% !important;
+    max-width: 100%;
+    height: 100% !important;
+    max-height: 100%;
+}
 #G-game {
     display: flex;
     flex-direction: column;
@@ -423,7 +433,7 @@ label {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        justify-content: space-between;
+        align-items: center;
     }
     
     #G-canva_container {
