@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function load_data(select,bioPict){
+    if (!playersData || playersData.length === 0) {
+        setTimeout(() => load_data(select), 100); // réessaye plus tard
+        return;
+    }
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
     
     if (selectedPlayer) {
