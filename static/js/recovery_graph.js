@@ -11,7 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function recovery_get_info(select){
+    if (!playersData || playersData.length === 0) {
+        setTimeout(() => recovery_get_info(select), 100); // réessaye plus tard
+        return;
+    }
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
+    
     if (!selectedPlayer) return;
 
     const player_id = selectedPlayer.pid;

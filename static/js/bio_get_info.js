@@ -21,7 +21,7 @@ function load_data(select,bioPict){
         <img src="${selectedPlayer.url}" alt="${selectedPlayer.surname} Picture" class="player-img"></img>
         `;
     } else {
-        bioPicts.innerHTML = "";
+        bioPict.innerHTML = "";
     }
 }
 

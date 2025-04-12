@@ -21,7 +21,15 @@ const teamLogos = {
 
 
 function match_get_info(select){
+    if (!playersData || playersData.length === 0) {
+        setTimeout(() => match_get_info(select), 100); // réessaye plus tard
+        return;
+    }
+
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
+    console.log('games_match')
+    console.log("playersData",playersData)
+    console.log("selected player",selectedPlayer, "id :",select.value)
     const player_id = selectedPlayer.pid
     fetch("../static/csv/CFC GPS Data.csv")
         .then(response => response.text())

@@ -13,8 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Fonction match_get_stats pour récupérer les 4 derniers matchs filtrés
 function match_get_stats(select) {
+
     return new Promise((resolve, reject) => {
         const selectedPlayer = playersData.find(player => player.fullName === select.value);
+        
         const player_id = selectedPlayer.pid;
         fetch("../static/csv/CFC GPS Data.csv")
             .then(response => response.text())
@@ -59,6 +61,10 @@ function match_get_stats(select) {
 }
 
 function match_get_graphs(select) {
+    if (!playersData || playersData.length === 0) {
+        setTimeout(() => match_get_graphs(select), 100); // réessaye plus tard
+        return;
+    }
 
     if (statchart1) {
         statchart1.destroy();

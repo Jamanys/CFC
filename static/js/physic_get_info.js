@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function thestufftodo(select){
+    if (!playersData || playersData.length === 0) {
+        setTimeout(() => thestufftodo(select), 100); // réessaye plus tard
+        return;
+    }
+
+
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
     if (!selectedPlayer) return; // Sécurité si le joueur n'existe pas
 

@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function get_target_info(select){
+    if (!playersData || playersData.length === 0) {
+        setTimeout(() => get_target_info(select), 100); // réessaye plus tard
+        return;
+    }
+
     const selectedPlayer = playersData.find(player => player.fullName === select.value);
     if (!selectedPlayer) return; // Sécurité si le joueur n'existe pas
 

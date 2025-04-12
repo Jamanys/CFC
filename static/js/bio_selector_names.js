@@ -1,18 +1,15 @@
 let playersData = []; // Stocker les données des joueurs
 
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("start bsn")
     load_data_and_selector()
     console.log("end bsn")
-    document.addEventListener("DOMContentLoaded", function () {
-    load_data_and_selector()
-    });
 });
 
 
 
 
 function load_data_and_selector(){
-    console.log("start bsn")
     fetch("../static/csv/AS Player Infos.csv")
         .then(response => response.text())
         .then(data => {
@@ -49,6 +46,7 @@ function load_data_and_selector(){
                     };
 
                     playersData.push(player);
+                    console.log("playersData", playersData)
 
                     let option = document.createElement("option");
                     option.value = player.fullName;
