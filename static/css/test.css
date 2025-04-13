@@ -87,8 +87,6 @@ label {
 /* Spécifique à #B-main */
 #B-main {
     max-width: 79%;
-    background-color: red;
-    padding:10px
 }
 
 /* Spécifique à #B-physical */
@@ -109,7 +107,6 @@ label {
     flex-direction: row;
     gap: 30px;
     border-radius: 10px;
-    background-color: purple;
 }
 
 #C-targets {
@@ -118,7 +115,6 @@ label {
     flex-direction: row;
     gap: 10px;
     border-radius: 10px;
-    background-color: green;
 }
 
 #C-movement {
