@@ -58,7 +58,7 @@ html, body {
 /*###############################*/
 
 #AB-bot {
-    height: 97%;
+    height: 97vh;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -75,49 +75,56 @@ label {
     margin-bottom: 10px;
 }
 
-#B-main {
-    flex: 5.5;
-    min-height: 87vh;
-    height: 87vh;
-    max-width: 79%;
+#B-main,
+#B-physical {
+    min-height: 730px;
+    height: 87vh; /* ✅ Pour forcer une hauteur commune et stable */
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px;
 }
+
+/* Spécifique à #B-main */
+#B-main {
+    max-width: 79%;
+    background-color: red;
+    padding:10px
+}
+
+/* Spécifique à #B-physical */
 #B-physical {
     max-width: 19%;
-    min-height: 730px;
-    height: 87vh;
     background-color: #034694;
     color: #ffffff;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px;
     border-radius: 10px;
-    gap: 10px;
 }
 
+/* Enfants de B-main */
 #C-info {
-    flex: 0.7;
+    flex: 0.7; /* 70% de B-main */
     display: flex;
     flex-direction: row;
-    border-radius: 10px;
     gap: 30px;
+    border-radius: 10px;
+    background-color: purple;
 }
+
 #C-targets {
-    flex: 0.3;
+    flex: 0.3; /* 30% de B-main */
     display: flex;
     flex-direction: row;
-    border-radius: 10px;
     gap: 10px;
+    border-radius: 10px;
+    background-color: green;
 }
+
 #C-movement {
     display: flex;
     width: 95%;
-    height: 30%;
+    height: 22%;
     flex-direction: column;
     justify-content: center; /* Centre le contenu verticalement */
     align-items: center; /* Centre horizontalement */
@@ -150,13 +157,11 @@ label {
     justify-content: center;
     background-color: #034694;
     border-radius: 10px;
-    gap: 2px;
+    line-height: 0.2;
     padding: 10px;
     text-align: center;
     color: white;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    height: 90%;
     width: 33.3%;
 }
 .date, .tracking {
