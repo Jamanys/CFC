@@ -180,8 +180,8 @@ label {
 #E-player_picture{
     text-align: center;
     background-color: #1d2327;
-    height: 38%;
-    max-height: 38%;
+    height: 42%;
+    max-height: 42%;
     max-width: 100%;
     width: 100%;
     padding:10px;
@@ -189,8 +189,8 @@ label {
 }
 #E-match_stats {
     background-color: #1d2327;
-    height: 50%;
-    max-height: 50%;
+    height: 48%;
+    max-height: 48%;
     width: 100%;
     border-radius: 8px;
     text-align: center;
@@ -200,7 +200,7 @@ label {
     margin-bottom: 15px;
 }
 .player-img {
-    width: 100%;
+    width: auto;
     max-width: 150px;
     height: auto;
     border-radius: 50%;
