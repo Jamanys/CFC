@@ -24,10 +24,10 @@ function thestufftodo(select){
     // Définition des dates
     const today = new Date(2025, 2, 13);  // 13/03/2025 (Mois - 1 car JS commence à 0)
     const last30Days = new Date(today);
-    last30Days.setDate(today.getDate() - 60);
+    last30Days.setDate(today.getDate() - 30);
 
     const prev30Days = new Date(last30Days);
-    prev30Days.setDate(last30Days.getDate() - 60);
+    prev30Days.setDate(last30Days.getDate() - 30);
 
     fetch("../static/csv/CFC Physical Capability Data_.csv")
         .then(response => response.text())
@@ -98,6 +98,7 @@ function thestufftodo(select){
             // Injecter les stats dans la balise B-physical
             const physicalContainer = document.getElementById("B-physical");
             physicalContainer.innerHTML = `
+                <H1>TRAINING PERFS (30d)</H1>
                 <div id="C-movement">
                     <p>Agility</p>
                     <div id="D-phy-stats">

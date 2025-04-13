@@ -22,7 +22,7 @@ function recovery_get_info(select){
     const player_id = selectedPlayer.pid;
     const today_day = new Date("2025-03-13");
     const tenDaysAgo = new Date(today_day);
-    tenDaysAgo.setDate(today_day.getDate() - 7);
+    tenDaysAgo.setDate(today_day.getDate() - 20);
 
     fetch("../static/csv/CFC Recovery status Data.csv")
     .then(response => response.text())
@@ -49,7 +49,7 @@ function recovery_get_info(select){
 
             if (!dateStr || !pidRow || !metric || isNaN(value)) return null;
 
-            const date = parseDate(dateStr);
+            const date = parseDate1(dateStr);
             if (date < tenDaysAgo || pidRow != player_id) return null;
 
             return { date, metric, value };
@@ -153,9 +153,9 @@ function updateChart(labels, emboss, subjective, msk, sleep, bio) {
     });
 }
 
-function parseDate(dateStr) {
+function parseDate1(dateStr) {
     const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
-    return new Date(year, month - 1, day);
+    return new Date(year, month, day);
     }
 
     function fillMissingValues(labels, groupedData, metric) {
