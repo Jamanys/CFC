@@ -117,7 +117,7 @@ function match_get_graphs(select) {
         statchart1 = new Chart(document.getElementById("distanceChart"), {
             type: "bar",
             data: {
-                labels: ["- 21km/h", ">21km/h", ">24km/h", " + 27km/h"],
+                labels: [ "<21", "21-24", "24-27", ">27"],
                 datasets: [{
                     label: "Distance (m)",
                     data: [sums.distance-( sums.distance_over_21+sums.distance_over_24+ sums.distance_over_27), sums.distance_over_21, sums.distance_over_24, sums.distance_over_27],
@@ -181,7 +181,7 @@ function match_get_graphs(select) {
                 plugins: { 
                     title: { 
                         display: true,
-                        text: "Number of Accelerations/Decelerations",
+                        text: "Accelerations/Decelerations",
                         color: "white"
                     },
                     legend: {
@@ -196,7 +196,7 @@ function match_get_graphs(select) {
                         },
                         title: {
                             display: true,
-                            text: "Accel / Decel",
+                            text: "Number of accelerations",
                             color: "white"
                         }
                     },
@@ -209,7 +209,7 @@ function match_get_graphs(select) {
                         },
                         title: {
                             display: true,
-                            text: "square metre per second",
+                            text: "meter per square second",
                             color: "white",
                             size : 8
                         }
