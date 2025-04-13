@@ -334,27 +334,24 @@ label {
     #AB-bot {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 2rem; /* PAS 100rem ! */
         padding: 1rem;
-        overflow:visible !important;
+        overflow: visible !important;
         height: auto !important;
         max-height: none !important;
-        align-items: center;
+        align-items: stretch;
     }
 
     #B-main {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        width: 98%!important;
-        max-width: 98%!important;
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
     }
 
     #B-physical {
-        max-width: 100%!important;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
     }
 
     #C-targets{
@@ -420,7 +417,7 @@ label {
         overflow:scroll;
         display: flex;
         flex-direction: row;
-        height: 300px;
+        height: 300px !important;
         gap : 0.5rem;
     }
 
@@ -458,11 +455,12 @@ label {
         border-radius: 10px;
         font-size: 9px;
         padding: 1rem;
+        line-height: 1.2;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
 
     #C-movement {
-        width: 48%;
+        width: auto;
         height: auto;
     }
 
