@@ -73,8 +73,20 @@ function match_get_info(select){
                 const dateStr = line.split(",")[header.indexOf("date")];
                 const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
                 const date = new Date(year, month , day);  // Soustraction de 1 au mois pour la conversion
-                return date > new Date("2025-04-13");
-            }).slice(0, 3);  // Récupérer le premier match après la date limite
+                return date > new Date("2025-04-13")
+            })
+            .sort((a, b) => {
+                const dateStrA = a.split(",")[header.indexOf("date")];
+                const [dayA, monthA, yearA] = dateStrA.split("/").map(num => parseInt(num, 10));
+                const dateA = new Date(yearA, monthA - 1, dayA);  // Soustraction de 1 au mois pour la conversion
+
+                const dateStrB = b.split(",")[header.indexOf("date")];
+                const [dayB, monthB, yearB] = dateStrB.split("/").map(num => parseInt(num, 10));
+                const dateB = new Date(yearB, monthB - 1, dayB);  // Soustraction de 1 au mois pour la conversion
+
+                return dateA - dateB;  // Trie du plus ancien au plus récent
+            })
+            .slice(0, 3);  // Récupérer le premier match après la date limite
             const mergedData = beforeDate.concat(afterDate);
 
 
@@ -87,9 +99,6 @@ function match_get_info(select){
                 // Extraire les valeurs nécessaires : opposition_code, date et distance
                 const oppositionCode = columns[header.indexOf("opposition_code")];
                 const dateStr = columns[header.indexOf("date")];
-                const distance = parseFloat(columns[header.indexOf("distance")]) / 1000;
-                const distance_over_27 = parseFloat(columns[header.indexOf("distance_over_27")]);
-                const nbAccel = parseFloat(columns[header.indexOf("accel_decel_over_3_5")]);
 
                 // Formater la date au format "dd/mm"
                 const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
