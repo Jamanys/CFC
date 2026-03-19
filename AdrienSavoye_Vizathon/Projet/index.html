@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="../static/css/test.css">
+    <title>CFC</title>
+</head>
+<body>
+    <div id="A-base">
+        <div id="AB-top">
+            <div id ="top-div-title">
+                <h1 id="top-title">CFC PLAYER SUPERVISOR</h1>
+            </div>
+            <div id="top-select-wrapper">
+                <select id="E-player-select">
+                    <option value="Wesley Fofana" disabled selected>Select a player</option>
+                </select>
+            </div>
+        </div>
+        <div id="AB-bot">
+            <div id="B-main">
+                <div id="C-info">
+                    <div id="D-bio">
+                        <div id="E-player_picture"></div>
+                        <div id="E-games"></div>
+                    </div>
+                    <div id="D-games_and_recovery">
+                        <div id="E-recovery">
+                            <h1>RECOVERY EVOLUTION (Last 30 days)</h1>
+                            <div id="E-recovery-chart-container">
+                                <canvas id="F-recovery-chart"></canvas>
+                            </div>
+                        </div>
+                        <div id="E-match_stats">
+                            <h1>LAST 4 GAMES STATS</h1>
+                            <div id="F-match_stats-canvas">
+                                <div id="G-canva_container">
+                                    <canvas id="distanceChart"></canvas>
+                                </div>
+                                <div id="G-canva_container">
+                                    <canvas id="accelChart"></canvas>
+                                </div>
+                                <div id="G-canva_container">
+                                    <canvas id="hrChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="C-targets">targets</div>
+            </div>
+            <div id="B-physical"> physical </div>
+        </div>
+    </div>
+    <script src="../static/js/bio_selector_names.js"></script>
+    <script src="../static/js/bio_get_info.js" defer></script>
+    <script src="../static/js/games_match_display.js" defer></script>
+    <script src="../static/js/match_perf.js" defer></script>
+    <script src="../static/js/recovery_graph.js" defer></script>
+    <script src="../static/js/physic_get_info.js"defer></script>
+    <script src="../static/js/target_get_info.js"defer></script>
+</body>
+</html>

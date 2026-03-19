@@ -1,0 +1,643 @@
+/* ================================================================
+   CFC PLAYER SUPERVISOR — Chelsea FC Design System
+   Adapté aux injections dynamiques de chaque JS :
+     bio_get_info       → #E-player_picture : h3 + img.player-img
+     games_match_display→ #E-games : #F-game-title #F-game-cards #G-game
+     target_get_info    → #C-targets : #D-target-card .target .date .tracking
+     recovery_graph     → #F-recovery-chart (canvas)
+     match_perf         → #distanceChart #accelChart #hrChart (canvas)
+     physic_get_info    → #B-physical innerHTML : #C-movement #D-phy-stats canvas
+   ================================================================ */
+
+   @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap');
+
+   /* ── RESET ── */
+   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+   
+   /* ── VARIABLES ── */
+   :root {
+       --blue:        #034694;
+       --blue-dark:   #022E62;
+       --blue-deeper: #011A3A;
+       --gold:        #D4AF37;
+       --gold-dim:    rgba(212,175,55,0.18);
+       --gold-border: rgba(212,175,55,0.28);
+   
+       --bg:          #0D1B2E;
+       --bg-card:     #112040;
+       --bg-el:       #1A2E4A;
+       --bg-hover:    #1E344F;
+   
+       --text:        #F0F4FF;
+       --text-2:      #8AA0C4;
+       --text-3:      #4A6080;
+   
+       --green:       #3DD68C;
+       --red:         #E84040;
+   
+       --border:      rgba(3,70,148,0.35);
+       --border-sub:  rgba(255,255,255,0.05);
+   
+       --r-sm: 6px;
+       --r-md: 8px;
+       --r-lg: 12px;
+   }
+   
+   /* ── BASE ── */
+   html, body {
+       font-family: 'Barlow', sans-serif;
+       background: var(--bg);
+       color: var(--text);
+       font-size: 13px;
+       line-height: 1.5;
+       min-height: 100vh;
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   ::-webkit-scrollbar { width: 5px; height: 5px; }
+   ::-webkit-scrollbar-track { background: var(--bg); }
+   ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+   
+   /* ================================================================
+      LAYOUT RACINE
+   ================================================================ */
+   #A-base {
+       display: flex;
+       flex-direction: column;
+       min-height: 100vh;
+   }
+   
+   /* ================================================================
+      HEADER
+   ================================================================ */
+   #AB-top {
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       height: 56px;
+       padding: 0 24px;
+       background: linear-gradient(135deg, var(--blue-deeper) 0%, var(--blue) 100%);
+       border-bottom: 2px solid var(--gold);
+       position: sticky;
+       top: 0;
+       z-index: 100;
+       flex-shrink: 0;
+       gap: 16px;
+   }
+   
+   #top-div-title {
+       display: flex;
+       align-items: center;
+       gap: 12px;
+   }
+   
+   /* Badge CFC */
+   #top-div-title::before {
+       content: 'CFC';
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       width: 32px;
+       height: 32px;
+       background: var(--gold);
+       border-radius: 50%;
+       font-family: 'Barlow Condensed', sans-serif;
+       font-weight: 900;
+       font-size: 12px;
+       color: var(--blue-deeper);
+       letter-spacing: 0.5px;
+       flex-shrink: 0;
+   }
+   
+   #top-title {
+       font-family: 'Barlow Condensed', sans-serif;
+       font-weight: 700;
+       font-size: 30px;
+       letter-spacing: 2.5px;
+       text-transform: uppercase;
+       color: var(--text);
+       /* Désactive le position:absolute du HTML d'origine */
+       position: static !important;
+       transform: none !important;
+       left: auto !important;
+   }
+   
+   #top-title span { color: var(--gold); }
+   
+   #top-select-wrapper {
+       display: flex;
+       align-items: center;
+       gap: 14px;
+       margin-left: auto;
+   }
+   
+   /* Indicateur LIVE */
+   #top-select-wrapper::before {
+       content: '● LIVE';
+       font-size: 10px;
+       font-weight: 700;
+       letter-spacing: 1.5px;
+       color: var(--green);
+       animation: blink 1.8s infinite;
+       white-space: nowrap;
+   }
+   
+   @keyframes blink {
+       0%,100% { opacity: 1; }
+       50%      { opacity: 0.25; }
+   }
+   
+   #E-player-select {
+       background: rgba(255,255,255,0.08);
+       border: 1px solid var(--gold-border);
+       color: var(--text);
+       padding: 6px 14px;
+       border-radius: var(--r-sm);
+       font-family: 'Barlow', sans-serif;
+       font-size: 13px;
+       cursor: pointer;
+       outline: none;
+       transition: background 0.2s;
+       -webkit-appearance: none;
+       appearance: none;
+   }
+   #E-player-select:hover { background: rgba(255,255,255,0.14); }
+   #E-player-select option { background: var(--blue-deeper); }
+   
+   /* ================================================================
+      GRILLE PRINCIPALE  220px | 1fr | 220px
+   ================================================================ */
+   #AB-bot {
+       display: grid;
+       grid-template-columns: 400px 1fr 400px;
+       gap: 1px;
+       background: var(--bg);
+       flex: 1;
+       min-height: calc(100vh - 58px);
+       /* Désactive les anciens styles */
+       padding: 0 !important;
+       border-radius: 0 !important;
+       align-items: stretch;
+   }
+   
+   /* Réinitialisation du h1 hérité */
+   #AB-bot h1 {
+       font-family: 'Barlow Condensed', sans-serif;
+       font-size: 11px;
+       font-weight: 700;
+       letter-spacing: 2px;
+       text-transform: uppercase;
+       color: var(--text-3);
+       margin: 0 0 10px;
+   }
+   
+   label {
+       font-size: 10px;
+       font-weight: 700;
+       letter-spacing: 1px;
+       text-transform: uppercase;
+       color: var(--text-3);
+       margin-bottom: 6px;
+   }
+   
+   /* ================================================================
+      COLONNE GAUCHE  — Bio + Games
+      Contenu injecté par bio_get_info.js et games_match_display.js
+   ================================================================ */
+   #B-left-sidebar {
+       background: var(--bg-card);
+       padding: 20px 14px;
+       border-right: 10px solid var(--blue);
+       display: flex;
+       flex-direction: column;
+       gap: 14px;
+       max-height: 95vh;
+       overflow-y: auto;
+   }
+   
+   /* ── Zone photo + nom  (bio_get_info.js) ─────────────
+      Injecte : <h3>Nom</h3>  <img class="player-img" />
+   ─────────────────────────────────────────────────── */
+   #E-player_picture {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       gap: 8px;
+       padding-bottom: 14px;
+       border-bottom: 1px solid var(--border);
+       /* reset anciens styles */
+       background: transparent !important;
+       height: auto !important;
+       max-height: none !important;
+       max-width: none !important;
+       width: auto !important;
+       padding-left: 0 !important;
+       padding-right: 0 !important;
+       padding-top: 4px !important;
+       text-align: center;
+       border-radius: 0;
+   }
+   
+   #E-player_picture h3 {
+       font-family: 'Barlow Condensed', sans-serif;
+       font-weight: 700;
+       font-size: 60px;
+       color: var(--text);
+       text-align: center;
+       line-height: 1.2;
+       letter-spacing: 0.5px;
+   }
+   
+   .player-img {
+       width: auto;
+       height: 13vh;
+       border-radius: 50%;
+       object-fit: cover;
+       border: 2px solid var(--gold);
+       box-shadow: 0 0 0 4px var(--gold-dim);
+   }
+   
+   /* ── Zone matchs (games_match_display.js) ────────────
+      Injecte : #F-game-title  #F-game-cards  #G-game
+   ─────────────────────────────────────────────────── */
+   #E-games {
+       display: flex;
+       flex-direction: column;
+       gap: 6px;
+       /* reset */
+       background: transparent !important;
+       height: auto !important;
+       max-height: none !important;
+       padding: 0 !important;
+       justify-content: flex-start !important;
+       align-items: stretch !important;
+       font-size: 13px;
+       border-radius: 0;
+   }
+   
+   #F-game-title {
+       margin-bottom: 2px;
+   }
+   
+   #F-game-title h1 {
+       font-family: 'Barlow Condensed', sans-serif;
+       font-size: 40px;
+       font-weight: 700;
+       letter-spacing: 2px;
+       text-transform: uppercase;
+       color: var(--text-3);
+       display: flex;
+       align-items: center;
+       gap: 8px;
+       margin-bottom: 0;
+   }
+   
+   #F-game-title h1::after {
+       content: '';
+       flex: 1;
+       height: 1px;
+       background: var(--border);
+   }
+   
+   #F-game-cards {
+       display: flex;
+       flex-direction: column;
+       gap: 6px;
+       width: 100%;
+       height: auto;
+       flex-wrap: nowrap;
+       justify-content: flex-start;
+       align-items: stretch;
+   }
+   
+   #G-game {
+       display: flex;
+       flex-direction: row;
+       align-items: center;
+       gap: 12px;
+       background: var(--bg-el);
+       border-radius: var(--r-sm);
+       padding: 8px 10px;
+       border-left: 3px solid var(--blue);
+       transition: background 0.15s, border-color 0.15s;
+       cursor: pointer;
+       justify-content: flex-start;
+       height: 10vh;
+   }
+   
+   #G-game:hover {
+       background: var(--bg-hover);
+       border-left-color: var(--gold);
+   }
+   
+   #G-game img {
+       width: 60px !important;
+       height: 60px !important;
+       object-fit: contain;
+       flex-shrink: 0;
+   }
+   
+   #G-game p {
+       font-size: 40px;
+       font-weight: 600;
+       color: var(--text-2);
+   }
+   
+   /* ================================================================
+      COLONNE CENTRALE — Targets + Recovery + Match Stats
+   ================================================================ */
+   #B-main {
+       background: var(--bg);
+       padding: 16px;
+       display: flex;
+       flex-direction: column;
+       gap: 12px;
+       overflow-y: auto;
+       min-height: 0;
+       /* reset */
+       max-width: 100% !important;
+       max-height: 95vh !important;
+   }
+   
+   /* Désactive les wrappers intermédiaires si présents */
+   #C-info,
+   #D-bio,
+   #D-games_and_recovery {
+       display: contents;
+   }
+   
+   /* ── Targets (target_get_info.js) ────────────────────
+      Injecte des #D-target-card dans #C-targets
+   ─────────────────────────────────────────────────── */
+   #C-targets {
+       display: grid;
+       grid-template-columns: repeat(3, 1fr);
+       gap: 10px;
+       /* reset */
+       border-radius: 0;
+       height: auto !important;
+       align-items: stretch;
+   }
+   
+   #D-target-card {
+       background: var(--blue);
+       border-radius: var(--r-md);
+       padding: 14px 12px;
+       display: flex;
+       flex-direction: column;
+       gap: 8px;
+       border-top: 2px solid var(--gold);
+       position: relative;
+       overflow: hidden;
+       /* reset */
+       width: auto !important;
+       line-height: 1.4;
+       text-align: left;
+       color: var(--text);
+       font-weight: normal;
+   }
+   
+   #D-target-card::before {
+       content: '';
+       position: absolute;
+       top: 0; right: 0;
+       width: 40px; height: 40px;
+       background: rgba(212,175,55,0.08);
+       border-radius: 0 0 0 40px;
+   }
+   
+   #D-target-card .target {
+       font-size: 20px;
+       font-weight: 600;
+       color: var(--text);
+       line-height: 1.3;
+   }
+   
+   #D-target-card .date {
+       font-size: 18px;
+       color: rgba(240,244,255,0.65);
+       display: flex;
+       align-items: center;
+       gap: 4px;
+   }
+   
+   #D-target-card .tracking {
+       font-size: 18px;
+       font-weight: 700;
+       color: var(--gold);
+       display: flex;
+       align-items: center;
+       gap: 4px;
+   }
+   
+   .icon { font-size: 12px; }
+   
+   /* ── Recovery (recovery_graph.js) ───────────────────
+      Chart.js monte sur #F-recovery-chart
+   ─────────────────────────────────────────────────── */
+   #E-recovery {
+       background: var(--bg-card);
+       border: 1px solid var(--border);
+       border-radius: var(--r-md);
+       padding: 14px 16px;
+       display: flex;
+       flex-direction: column;
+       gap: 8px;
+       /* reset */
+       height: 50vh !important;
+       max-height: none !important;
+       max-width: none !important;
+       justify-content: flex-start !important;
+       align-items: stretch !important;
+       box-shadow: none !important;
+   }
+   
+   #E-recovery-chart-container {
+       width: 100% !important;
+       height: 45vh !important;
+       max-width: 100% !important;
+       max-height: none !important;
+       box-sizing: border-box !important;
+       display: block;
+       overflow: visible;
+   }
+   
+   #F-recovery-chart {
+       width: 100% !important;
+       max-height:100%  !important;
+   }
+   
+   /* ── Match stats (match_perf.js) ─────────────────────
+      3 canvas : #distanceChart #accelChart #hrChart
+   ─────────────────────────────────────────────────── */
+   #E-match_stats {
+       background: var(--bg-card);
+       border: 1px solid var(--border);
+       border-radius: var(--r-md);
+       padding: 14px 16px;
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
+       /* reset */
+       height: 31vh !important;
+       max-height: none !important;
+       width: auto !important;
+       text-align: left;
+   }
+   
+   #F-match_stats-canvas {
+       display: grid;
+       grid-template-columns: repeat(3, 1fr);
+       gap: 10px;
+       /* reset anciens styles flex */
+       flex-direction: unset !important;
+       justify-content: unset !important;
+   }
+   
+   /* .chart-wrap = nouveau wrapper (remplace #G-canva_container dupliqué) */
+   .chart-wrap,
+   #G-canva_container {
+       background: var(--bg-el);
+       border-radius: var(--r-sm);
+       padding: 8px;
+       height: 300px;
+       display: flex;
+       flex-direction: column;
+       min-width: 0;
+   }
+   
+   .chart-wrap canvas,
+   #G-canva_container canvas {
+       width: 100% !important;
+       flex: 1;
+       min-height: 0;
+       height: 0 !important; /* flex impose la hauteur */
+   }
+   
+   /* ================================================================
+      COLONNE DROITE — Physical
+      physic_get_info.js REMPLACE tout le innerHTML de #B-physical.
+      Il injecte :
+        <H1>TRAINING PERFS (30d)</H1>
+        <div id="C-movement">
+          <p>Agility</p>
+          <div id="D-phy-stats"><canvas id="chart-Agility"></canvas></div>
+        </div>
+        ... × 4
+   ================================================================ */
+   #B-physical {
+       background: var(--bg-card);
+       border-left: 10px solid var(--blue);
+       padding: 16px 12px;
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
+       overflow-y: auto;
+       min-height: 0;
+       max-height: 95vh;
+       /* reset */
+       max-width: none !important;
+       height: auto !important;
+       color: var(--text);
+       justify-content: flex-start !important;
+       align-items: stretch !important;
+   }
+   
+   /* Titre injecté par physic_get_info.js : <H1>TRAINING PERFS (30d)</H1> */
+   #B-physical H1,
+   #B-physical h1 {
+       font-family: 'Barlow Condensed', sans-serif;
+       font-size: 30px;
+       font-weight: 700;
+       letter-spacing: 2px;
+       text-transform: uppercase;
+       color: var(--gold);
+       text-align: center;
+       padding-bottom: 10px;
+       border-bottom: 1px solid var(--gold-border);
+       margin-bottom: 2px;
+   }
+   
+   /* Blocs injectés : <div id="C-movement"> */
+   #B-physical #C-movement {
+       background: var(--bg-el);
+       border-radius: var(--r-sm);
+       padding: 10px;
+       display: flex;
+       flex-direction: column;
+       gap: 6px;
+       /* reset (le #C-movement du centre a d'autres styles) */
+       width: auto !important;
+       height: auto !important;
+       grid-template-columns: unset !important;
+       text-align: left;
+       justify-content: flex-start !important;
+       align-items: stretch !important;
+       overflow: visible !important;
+       border-bottom: none;
+   }
+   
+   /* Label du groupe (ex: "Agility") */
+   #B-physical #C-movement > p {
+       font-family: 'Barlow Condensed', sans-serif;
+       font-size: 25px;
+       font-weight: 700;
+       letter-spacing: 1.5px;
+       text-transform: uppercase;
+       color: var(--text-3);
+   }
+   
+   /* Canvas wrapper */
+   #B-physical #D-phy-stats {
+       width: 100%;
+       height: 16vh;
+       display: flex;
+       align-items: stretch;
+       padding: 0;
+       max-height: none !important;
+       justify-content: stretch;
+   }
+   
+   #B-physical #D-phy-stats canvas {
+       width: 100% !important;
+       height: 15.5vh !important;
+   }
+   
+   /* ================================================================
+      MOBILE
+   ================================================================ */
+   @media (max-width: 960px) {
+       #AB-top {
+           flex-wrap: wrap;
+           height: auto;
+           padding: 10px 16px;
+           gap: 8px;
+       }
+   
+       #top-select-wrapper { width: 100%; justify-content: center; }
+       #E-player-select { width: 100%; }
+   
+       #AB-bot {
+           grid-template-columns: 1fr;
+           min-height: auto;
+       }
+   
+       #B-left-sidebar,
+       #B-main,
+       #B-physical {
+           border-left: none;
+           border-top: 1px solid var(--border);
+           overflow-y: visible;
+           height: auto;
+       }
+   
+       #C-targets { grid-template-columns: repeat(3, 1fr); }
+       #F-match_stats-canvas { grid-template-columns: 1fr; }
+   
+       .chart-wrap,
+       #G-canva_container { height: 180px; }
+   }
+   
+   @media (max-width: 600px) {
+       #C-targets { grid-template-columns: 1fr; }
+   }

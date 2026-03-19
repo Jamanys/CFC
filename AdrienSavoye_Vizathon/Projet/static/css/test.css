@@ -1,0 +1,472 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    font-family: 'Arial', sans-serif;
+    background-color: #101517fa;
+    color: #ffffff;
+}
+
+#A-base {
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#AB-top {
+    display: flex;
+    justify-content: space-between; /* Sépare titre et select */
+    align-items: center;
+    height: 60px; /* ou un % plus raisonnable si besoin */
+    padding: 0 20px;
+    background-color: #034694;
+    color: white;
+    position: relative;
+    border-bottom: 1px solid #ffffff33;
+}
+
+#top-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    margin: 0;
+}
+
+#top-select-wrapper {
+    margin-left: auto;
+}
+
+#E-player-select {
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#E-player-select:hover {
+    background-color: #8592f7;
+}
+/*###############################*/
+/* CSS pour la partie principale */
+/*###############################*/
+
+#AB-bot {
+    height: 97vh;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 10px;
+}
+#AB-bot h1{
+    font-size: 15px;
+    color: whitesmoke;
+}
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#B-main,
+#B-physical {
+    min-height: 730px;
+    height: 87vh; /* ✅ Pour forcer une hauteur commune et stable */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Spécifique à #B-main */
+#B-main {
+    max-width: 79%;
+}
+
+/* Spécifique à #B-physical */
+#B-physical {
+    max-width: 19%;
+    background-color: #034694;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Enfants de B-main */
+#C-info {
+    flex: 0.7; /* 70% de B-main */
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    border-radius: 10px;
+}
+
+#C-targets {
+    flex: 0.3; /* 30% de B-main */
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+#C-movement {
+    display: flex;
+    width: 95%;
+    height: 22%;
+    flex-direction: column;
+    justify-content: center; /* Centre le contenu verticalement */
+    align-items: center; /* Centre horizontalement */
+    background-color: #022E62;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden; /* Empêche les dépassements */
+}
+
+#D-bio {
+    display: flex;
+    flex-direction: column;
+    width:20%;
+    max-width: 20%;
+    height: 100%;
+    gap: 10px;
+}
+#D-games_and_recovery {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width:80%;
+    max-width: 80%;
+    gap: 10px;
+}
+#D-target-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #034694;
+    border-radius: 10px;
+    line-height: 0.2;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    width: 33.3%;
+}
+.date, .tracking {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.icon {
+    font-size: 1.2em;
+}
+#D-phy-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    max-height: 72%;
+}
+
+#E-player_picture{
+    text-align: center;
+    background-color: #1d2327;
+    height: 42%;
+    max-height: 42%;
+    max-width: 100%;
+    width: 100%;
+    padding:10px;
+    border-radius: 8px;
+}
+#E-match_stats {
+    background-color: #1d2327;
+    height: 48%;
+    max-height: 48%;
+    width: 100%;
+    border-radius: 8px;
+    text-align: center;
+}
+#E-Bio_infos h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.player-img {
+    width: auto;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+#E-games{
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    height: 62%;
+    max-height: 62%;
+    width: 100%;
+    max-width: 100%;
+
+    background-color: #1d2327;
+    color : whitesmoke;
+
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 11px;
+    gap: 1px;
+}
+#E-recovery {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    max-height: 50%;
+    max-width: 100%;
+
+    background-color: #1d2327;
+    color : whitesmoke;
+
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0.1, 0.1, 0.1, 0.1);
+    padding: 10px;
+}
+#E-recovery-chart-container {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    box-sizing: border-box !important;
+}
+#E-quality, #E-phy-text {
+    color: #e3f2fd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#F-game-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+#F-match_stats-canvas {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+#G-canva_container {
+    max-width: 80%;
+    width: 500px;
+    max-height:90% ;
+    height: 200px;
+}
+
+#G-canva_container canvas {
+    width: 100% !important;
+    max-width: 100%;
+    height: 100% !important;
+    max-height: 100%;
+}
+#G-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    gap: 1px;
+}
+
+
+/* ======= MOBILE RESPONSIVE CSS ======= */
+@media (max-width: 768px) {
+    html, body,#A-base {
+        overflow: auto !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+
+    #AB-top {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        align-content: center;
+        width: auto !important;
+        height: 120px !important;
+        padding: 1rem;
+    }
+
+    #top-div-title, #top-select-wrapper {
+        min-width: 100%;
+        min-height: 50%;
+    }
+    
+    #top-title {
+        font-size: 15px; /* Adjust as needed */
+    }
+    
+    #E-player-select {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    #AB-bot {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem; /* PAS 100rem ! */
+        padding: 1rem;
+        overflow: visible !important;
+        height: auto !important;
+        max-height: none !important;
+        align-items: stretch;
+    }
+
+    #B-main {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+    }
+
+    #B-physical {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+    }
+
+    #C-targets{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        max-width: 100%;
+        height: 6rem;
+        align-items: center;
+    }
+
+    #C-info {
+        max-width: 100% !important;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #D-bio{
+        width: 100%;
+        max-width: 100%;
+    }
+    #D-games_and_recovery {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        gap: 1rem;
+    }
+
+    #E-player_picture,#E-games {
+        text-align: center;
+        width: auto;
+    }
+    #E-player_picture .player-img {
+        max-width: 150px;
+        height: auto;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgb(255, 255, 255);
+        margin-bottom: 10px;
+    }
+
+    .player-img {
+        width: 80%;
+        height: auto;
+        max-width: 200px;
+        border-radius: 10px;
+    }
+
+    #F-game-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    #G-game {
+        text-align: center;
+        width: 30%;
+    }
+
+    #E-recovery-chart-container {
+        overflow:scroll;
+        display: flex;
+        flex-direction: row;
+        height: 300px !important;
+        gap : 0.5rem;
+    }
+
+    #E-match_stats {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: auto;
+    }
+
+    #F-match_stats-canvas {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    #G-canva_container {
+        max-width: 80%;
+        width: 500px;
+        max-height:90% ;
+        height: 200px;
+    }
+    
+    #G-canva_container canvas {
+        width: 100% !important;
+        max-width: 100%;
+        height: 100% !important;
+        max-height: 100%;
+    }
+    
+
+    #D-target-card {
+        background-color: #034694;
+        border-radius: 10px;
+        font-size: 9px;
+        padding: 1rem;
+        line-height: 1.2;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #C-movement {
+        width: auto;
+        height: auto;
+    }
+
+    #D-phy-stats canvas {
+        width: 100% !important;
+        height: 100px !important;
+    }
+}
+/* ======= END OF MOBILE RESPONSIVE CSS ======= */

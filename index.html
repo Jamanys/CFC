@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style_chelsea.css">
+    <title>CFC Player Supervisor</title>
+</head>
+<body>
+<div id="A-base">
+
+    <!-- ══════════════════════════
+         HEADER
+    ══════════════════════════ -->
+    <div id="AB-top">
+        <div id="top-div-title">
+            <h1 id="top-title">CFC <span>Player Supervisor</span></h1>
+        </div>
+        <div id="top-select-wrapper">
+            <!-- bio_selector_names.js append les <option> dynamiquement -->
+            <select id="E-player-select">
+                <option value="Wesley Fofana" disabled selected>Select a player</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════
+         3-COLUMN GRID
+    ══════════════════════════ -->
+    <div id="AB-bot">
+
+        <!-- ── COLONNE GAUCHE ── -->
+        <div id="B-left-sidebar">
+
+            <!--
+                bio_get_info.js injecte ici :
+                  <h3>Nom Prénom</h3>
+                  <img class="player-img" src="..." alt="..." />
+            -->
+            <div id="E-player_picture"></div>
+
+            <!--
+                games_match_display.js injecte ici :
+                  <div id="F-game-title"><h1>GAMES :</h1></div>
+                  <div id="F-game-cards">
+                    <div id="G-game">
+                      <img src="logo_url" style="height:50px" />
+                      <p>dd/mm</p>
+                    </div>
+                    ...
+                  </div>
+            -->
+            <div id="E-games"></div>
+
+        </div>
+
+        <!-- ── COLONNE CENTRALE ── -->
+        <div id="B-main">
+
+            <!--
+                target_get_info.js injecte ici (jusqu'à 3 cards) :
+                  <div id="D-target-card">
+                    <p class="target">Texte objectif</p>
+                    <p class="date"><span class="icon">⏰ :</span> dd/mm</p>
+                    <p class="tracking">💪 Achieved</p>
+                  </div>
+            -->
+            <div id="C-targets"></div>
+
+            <!-- recovery_graph.js monte le chart sur #F-recovery-chart -->
+            <div id="E-recovery">
+                <h1>Recovery Evolution (Last 30 days)</h1>
+                <div id="E-recovery-chart-container">
+                    <canvas id="F-recovery-chart"></canvas>
+                </div>
+            </div>
+
+            <!--
+                match_perf.js monte 3 Chart.js sur :
+                  #distanceChart  #accelChart  #hrChart
+            -->
+            <div id="E-match_stats">
+                <h1>Last 4 Games Stats</h1>
+                <div id="F-match_stats-canvas">
+                    <div class="chart-wrap" id="G-canva_container">
+                        <canvas id="distanceChart"></canvas>
+                    </div>
+                    <div class="chart-wrap" id="G-canva_container">
+                        <canvas id="accelChart"></canvas>
+                    </div>
+                    <div class="chart-wrap" id="G-canva_container">
+                        <canvas id="hrChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── COLONNE DROITE ──
+             physic_get_info.js REMPLACE TOUT le innerHTML de #B-physical.
+             Il injecte pour chaque groupe (Agility, Jump, Sprint, Upper Body) :
+               <H1>TRAINING PERFS (30d)</H1>
+               <div id="C-movement">
+                 <p>Agility</p>
+                 <div id="D-phy-stats">
+                   <canvas id="chart-Agility"></canvas>
+                 </div>
+               </div>
+               ... (x4)
+             Le CSS cible ces IDs injectés dynamiquement.
+        -->
+        <div id="B-physical"></div>
+
+    </div><!-- /AB-bot -->
+</div><!-- /A-base -->
+
+<script src="../static/js/bio_selector_names.js"></script>
+<script src="../static/js/bio_get_info.js"       defer></script>
+<script src="../static/js/games_match_display.js" defer></script>
+<script src="../static/js/match_perf.js"          defer></script>
+<script src="../static/js/recovery_graph.js"      defer></script>
+<script src="../static/js/physic_get_info.js"     defer></script>
+<script src="../static/js/target_get_info.js"     defer></script>
+</body>
+</html>
