@@ -1,12 +1,7 @@
 /* ================================================================
    CFC PLAYER SUPERVISOR — Chelsea FC Design System
-   Adapté aux injections dynamiques de chaque JS :
-     bio_get_info       → #E-player_picture : h3 + img.player-img
-     games_match_display→ #E-games : #F-game-title #F-game-cards #G-game
-     target_get_info    → #C-targets : #D-target-card .target .date .tracking
-     recovery_graph     → #F-recovery-chart (canvas)
-     match_perf         → #distanceChart #accelChart #hrChart (canvas)
-     physic_get_info    → #B-physical innerHTML : #C-movement #D-phy-stats canvas
+   ONE-PAGER : aucun scroll, tout tient dans 100vh
+   Unités : vh + flex/grid fr — zéro pixel fixe sur les hauteurs
    ================================================================ */
 
    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap');
@@ -36,11 +31,13 @@
        --red:         #E84040;
    
        --border:      rgba(3,70,148,0.35);
-       --border-sub:  rgba(255,255,255,0.05);
+       --gold-bdr:    rgba(212,175,55,0.28);
+   
+       /* Hauteur du header — référence unique pour tout le reste */
+       --header-h: 56px;
    
        --r-sm: 6px;
        --r-md: 8px;
-       --r-lg: 12px;
    }
    
    /* ── BASE ── */
@@ -48,47 +45,47 @@
        font-family: 'Barlow', sans-serif;
        background: var(--bg);
        color: var(--text);
-       font-size: 13px;
-       line-height: 1.5;
-       min-height: 100vh;
+       font-size: clamp(11px, 1.1vw, 14px); /* s'adapte à la largeur écran */
+       line-height: 1.4;
+       height: 100vh;
+       overflow: hidden; /* one-pager strict */
        -webkit-font-smoothing: antialiased;
    }
    
-   ::-webkit-scrollbar { width: 5px; height: 5px; }
+   ::-webkit-scrollbar { width: 4px; height: 4px; }
    ::-webkit-scrollbar-track { background: var(--bg); }
    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
    
    /* ================================================================
-      LAYOUT RACINE
+      LAYOUT RACINE — colonne header + grille
    ================================================================ */
    #A-base {
        display: flex;
        flex-direction: column;
-       min-height: 100vh;
+       height: 100vh;
+       overflow: hidden;
    }
    
    /* ================================================================
-      HEADER
+      HEADER  (hauteur fixe, toutes les hauteurs enfants = 100vh - header-h)
    ================================================================ */
    #AB-top {
        display: flex;
        align-items: center;
        justify-content: space-between;
-       height: 56px;
-       padding: 0 24px;
+       height: var(--header-h);
+       flex-shrink: 0;
+       padding: 0 20px;
        background: linear-gradient(135deg, var(--blue-deeper) 0%, var(--blue) 100%);
        border-bottom: 2px solid var(--gold);
-       position: sticky;
-       top: 0;
-       z-index: 100;
-       flex-shrink: 0;
        gap: 16px;
+       z-index: 100;
    }
    
    #top-div-title {
        display: flex;
        align-items: center;
-       gap: 12px;
+       gap: 10px;
    }
    
    /* Badge CFC */
@@ -97,13 +94,13 @@
        display: flex;
        align-items: center;
        justify-content: center;
-       width: 32px;
-       height: 32px;
+       width: 30px;
+       height: 30px;
        background: var(--gold);
        border-radius: 50%;
        font-family: 'Barlow Condensed', sans-serif;
        font-weight: 900;
-       font-size: 12px;
+       font-size: 11px;
        color: var(--blue-deeper);
        letter-spacing: 0.5px;
        flex-shrink: 0;
@@ -112,16 +109,14 @@
    #top-title {
        font-family: 'Barlow Condensed', sans-serif;
        font-weight: 700;
-       font-size: 30px;
+       font-size: clamp(16px, 2vw, 26px);
        letter-spacing: 2.5px;
        text-transform: uppercase;
        color: var(--text);
-       /* Désactive le position:absolute du HTML d'origine */
        position: static !important;
        transform: none !important;
        left: auto !important;
    }
-   
    #top-title span { color: var(--gold); }
    
    #top-select-wrapper {
@@ -134,98 +129,96 @@
    /* Indicateur LIVE */
    #top-select-wrapper::before {
        content: '● LIVE';
-       font-size: 10px;
+       font-size: clamp(9px, 0.8vw, 11px);
        font-weight: 700;
        letter-spacing: 1.5px;
        color: var(--green);
        animation: blink 1.8s infinite;
        white-space: nowrap;
    }
-   
-   @keyframes blink {
-       0%,100% { opacity: 1; }
-       50%      { opacity: 0.25; }
-   }
+   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
    
    #E-player-select {
        background: rgba(255,255,255,0.08);
        border: 1px solid var(--gold-border);
        color: var(--text);
-       padding: 6px 14px;
+       padding: 5px 12px;
        border-radius: var(--r-sm);
        font-family: 'Barlow', sans-serif;
-       font-size: 13px;
+       font-size: clamp(11px, 1vw, 13px);
        cursor: pointer;
        outline: none;
        transition: background 0.2s;
        -webkit-appearance: none;
        appearance: none;
    }
-   #E-player-select:hover { background: rgba(255,255,255,0.14); }
+   #E-player-select:hover  { background: rgba(255,255,255,0.14); }
    #E-player-select option { background: var(--blue-deeper); }
    
    /* ================================================================
-      GRILLE PRINCIPALE  220px | 1fr | 220px
+      GRILLE PRINCIPALE 3 colonnes
+      Colonnes gauche et droite : 22% chacune, centre : le reste
+      Hauteur = exactement 100vh - header
    ================================================================ */
    #AB-bot {
        display: grid;
-       grid-template-columns: 400px 1fr 400px;
-       gap: 1px;
-       background: var(--bg);
-       flex: 1;
-       min-height: calc(100vh - 58px);
-       /* Désactive les anciens styles */
+       grid-template-columns: 22% 1fr 22%;
+       grid-template-rows: 1fr;
+       height: calc(100vh - var(--header-h));
+       overflow: hidden;
+       gap: 2px;
+       background: var(--border);
        padding: 0 !important;
        border-radius: 0 !important;
-       align-items: stretch;
+       flex: 1;
    }
    
-   /* Réinitialisation du h1 hérité */
+   /* Reset h1 global dans la grille */
    #AB-bot h1 {
        font-family: 'Barlow Condensed', sans-serif;
-       font-size: 11px;
+       font-size: clamp(9px, 0.85vw, 11px);
        font-weight: 700;
        letter-spacing: 2px;
        text-transform: uppercase;
        color: var(--text-3);
-       margin: 0 0 10px;
+       margin: 0 0 6px;
+       flex-shrink: 0;
    }
    
    label {
-       font-size: 10px;
+       font-size: clamp(9px, 0.8vw, 11px);
        font-weight: 700;
        letter-spacing: 1px;
        text-transform: uppercase;
        color: var(--text-3);
-       margin-bottom: 6px;
    }
    
    /* ================================================================
-      COLONNE GAUCHE  — Bio + Games
-      Contenu injecté par bio_get_info.js et games_match_display.js
+      COLONNE GAUCHE — Bio + 6 matchs
+      Flex colonne, overflow-y auto (scroll interne si besoin)
    ================================================================ */
    #B-left-sidebar {
        background: var(--bg-card);
-       padding: 20px 14px;
-       border-right: 10px solid var(--blue);
+       border-right: 3px solid var(--blue);
+       padding: 12px 10px;
        display: flex;
        flex-direction: column;
-       gap: 14px;
-       max-height: 95vh;
+       gap: 8px;
+       height: 100%;
        overflow-y: auto;
+       overflow-x: hidden;
    }
    
-   /* ── Zone photo + nom  (bio_get_info.js) ─────────────
-      Injecte : <h3>Nom</h3>  <img class="player-img" />
-   ─────────────────────────────────────────────────── */
+   /* ── Photo + nom (bio_get_info.js) ── */
    #E-player_picture {
        display: flex;
        flex-direction: column;
        align-items: center;
-       gap: 8px;
-       padding-bottom: 14px;
+       gap: 6px;
+       padding-bottom: 10px;
        border-bottom: 1px solid var(--border);
-       /* reset anciens styles */
+       flex-shrink: 0;
+       /* reset */
        background: transparent !important;
        height: auto !important;
        max-height: none !important;
@@ -235,13 +228,12 @@
        padding-right: 0 !important;
        padding-top: 4px !important;
        text-align: center;
-       border-radius: 0;
    }
    
    #E-player_picture h3 {
        font-family: 'Barlow Condensed', sans-serif;
        font-weight: 700;
-       font-size: 60px;
+       font-size: clamp(14px, 1.8vw, 22px);
        color: var(--text);
        text-align: center;
        line-height: 1.2;
@@ -250,20 +242,20 @@
    
    .player-img {
        width: auto;
-       height: 13vh;
+       height: clamp(60px, 10vh, 120px);
        border-radius: 50%;
        object-fit: cover;
        border: 2px solid var(--gold);
        box-shadow: 0 0 0 4px var(--gold-dim);
    }
    
-   /* ── Zone matchs (games_match_display.js) ────────────
-      Injecte : #F-game-title  #F-game-cards  #G-game
-   ─────────────────────────────────────────────────── */
+   /* ── 6 matchs (games_match_display.js) ── */
    #E-games {
        display: flex;
        flex-direction: column;
-       gap: 6px;
+       gap: 4px;
+       flex: 1; /* prend l'espace restant */
+       overflow-y: auto;
        /* reset */
        background: transparent !important;
        height: auto !important;
@@ -271,27 +263,19 @@
        padding: 0 !important;
        justify-content: flex-start !important;
        align-items: stretch !important;
-       font-size: 13px;
-       border-radius: 0;
+       font-size: clamp(10px, 1vw, 13px);
    }
    
-   #F-game-title {
-       margin-bottom: 2px;
-   }
+   #F-game-title { margin-bottom: 2px; flex-shrink: 0; }
    
    #F-game-title h1 {
-       font-family: 'Barlow Condensed', sans-serif;
-       font-size: 40px;
-       font-weight: 700;
-       letter-spacing: 2px;
-       text-transform: uppercase;
-       color: var(--text-3);
+       font-size: clamp(9px, 0.85vw, 11px) !important;
        display: flex;
        align-items: center;
        gap: 8px;
-       margin-bottom: 0;
+       margin-bottom: 0 !important;
+       color: var(--text-3) !important;
    }
-   
    #F-game-title h1::after {
        content: '';
        flex: 1;
@@ -302,149 +286,132 @@
    #F-game-cards {
        display: flex;
        flex-direction: column;
-       gap: 6px;
+       gap: 4px;
        width: 100%;
-       height: auto;
-       flex-wrap: nowrap;
-       justify-content: flex-start;
-       align-items: stretch;
    }
    
+   /* Chaque match : hauteur flex — 6 matchs se partagent l'espace */
    #G-game {
        display: flex;
        flex-direction: row;
        align-items: center;
-       gap: 12px;
+       gap: 10px;
        background: var(--bg-el);
        border-radius: var(--r-sm);
-       padding: 8px 10px;
+       padding: 6px 8px;
        border-left: 3px solid var(--blue);
        transition: background 0.15s, border-color 0.15s;
        cursor: pointer;
-       justify-content: flex-start;
-       height: 10vh;
+       flex: 1;
+       min-height: 0;
    }
-   
    #G-game:hover {
        background: var(--bg-hover);
        border-left-color: var(--gold);
    }
-   
    #G-game img {
-       width: 60px !important;
-       height: 60px !important;
+       width: clamp(28px, 3.5vw, 48px) !important;
+       height: clamp(28px, 3.5vw, 48px) !important;
        object-fit: contain;
        flex-shrink: 0;
    }
-   
    #G-game p {
-       font-size: 40px;
+       font-size: clamp(11px, 1.1vw, 15px);
        font-weight: 600;
        color: var(--text-2);
    }
    
    /* ================================================================
       COLONNE CENTRALE — Targets + Recovery + Match Stats
+      3 zones en flex colonne, hauteurs relatives
    ================================================================ */
    #B-main {
        background: var(--bg);
-       padding: 16px;
+       padding: 10px 12px;
        display: flex;
        flex-direction: column;
-       gap: 12px;
-       overflow-y: auto;
-       min-height: 0;
+       gap: 8px;
+       height: 100%;
+       overflow: hidden;
        /* reset */
        max-width: 100% !important;
-       max-height: 95vh !important;
+       max-height: none !important;
    }
    
-   /* Désactive les wrappers intermédiaires si présents */
-   #C-info,
-   #D-bio,
-   #D-games_and_recovery {
-       display: contents;
-   }
+   /* Désactive anciens wrappers */
+   #C-info, #D-bio, #D-games_and_recovery { display: contents; }
    
-   /* ── Targets (target_get_info.js) ────────────────────
-      Injecte des #D-target-card dans #C-targets
-   ─────────────────────────────────────────────────── */
+   /* ── Targets : hauteur fixe compacte ── */
    #C-targets {
        display: grid;
        grid-template-columns: repeat(3, 1fr);
-       gap: 10px;
-       /* reset */
+       gap: 8px;
+       flex-shrink: 0;
+       height: clamp(70px, 11vh, 120px);
        border-radius: 0;
-       height: auto !important;
        align-items: stretch;
    }
    
    #D-target-card {
        background: var(--blue);
        border-radius: var(--r-md);
-       padding: 14px 12px;
+       padding: 8px 10px;
        display: flex;
        flex-direction: column;
-       gap: 8px;
+       gap: 4px;
        border-top: 2px solid var(--gold);
        position: relative;
        overflow: hidden;
-       /* reset */
        width: auto !important;
-       line-height: 1.4;
+       line-height: 1.3;
        text-align: left;
        color: var(--text);
-       font-weight: normal;
    }
-   
    #D-target-card::before {
        content: '';
        position: absolute;
        top: 0; right: 0;
-       width: 40px; height: 40px;
+       width: 30px; height: 30px;
        background: rgba(212,175,55,0.08);
-       border-radius: 0 0 0 40px;
+       border-radius: 0 0 0 30px;
    }
-   
    #D-target-card .target {
-       font-size: 20px;
+       font-size: clamp(10px, 1vw, 13px);
        font-weight: 600;
        color: var(--text);
-       line-height: 1.3;
+       line-height: 1.2;
    }
-   
    #D-target-card .date {
-       font-size: 18px;
-       color: rgba(240,244,255,0.65);
+       font-size: clamp(9px, 0.9vw, 12px);
+       color: rgba(240,244,255,0.6);
        display: flex;
        align-items: center;
-       gap: 4px;
+       gap: 3px;
    }
-   
    #D-target-card .tracking {
-       font-size: 18px;
+       font-size: clamp(9px, 0.9vw, 12px);
        font-weight: 700;
        color: var(--gold);
        display: flex;
        align-items: center;
-       gap: 4px;
+       gap: 3px;
    }
+   .icon { font-size: 11px; }
    
-   .icon { font-size: 12px; }
-   
-   /* ── Recovery (recovery_graph.js) ───────────────────
-      Chart.js monte sur #F-recovery-chart
-   ─────────────────────────────────────────────────── */
+   /* ── Recovery : flex 1 (prend le plus d'espace) ── */
    #E-recovery {
        background: var(--bg-card);
        border: 1px solid var(--border);
        border-radius: var(--r-md);
-       padding: 14px 16px;
+       padding: 8px 12px;
        display: flex;
        flex-direction: column;
-       gap: 8px;
+       gap: 6px;
+       flex: 1.6; /* ratio plus grand que match_stats */
+       min-height: 0;
+       overflow: hidden;
        /* reset */
-       height: 50vh !important;
+       height: auto !important;
        max-height: none !important;
        max-width: none !important;
        justify-content: flex-start !important;
@@ -452,58 +419,65 @@
        box-shadow: none !important;
    }
    
+   /* Le conteneur canvas prend tout l'espace restant dans #E-recovery */
    #E-recovery-chart-container {
+       flex: 1;
+       min-height: 0;
        width: 100% !important;
-       height: 45vh !important;
+       height: 100% !important;
        max-width: 100% !important;
-       max-height: none !important;
+       max-height: 100% !important;
        box-sizing: border-box !important;
-       display: block;
-       overflow: visible;
+       display: flex;
+       overflow: hidden;
    }
    
    #F-recovery-chart {
        width: 100% !important;
-       max-height:100%  !important;
+       height: 100% !important;
    }
    
-   /* ── Match stats (match_perf.js) ─────────────────────
-      3 canvas : #distanceChart #accelChart #hrChart
-   ─────────────────────────────────────────────────── */
+   /* ── Match stats : flex 1 ── */
    #E-match_stats {
        background: var(--bg-card);
        border: 1px solid var(--border);
        border-radius: var(--r-md);
-       padding: 14px 16px;
+       padding: 8px 12px;
        display: flex;
        flex-direction: column;
-       gap: 10px;
+       gap: 6px;
+       flex: 1; /* ratio plus petit que recovery */
+       min-height: 0;
+       overflow: hidden;
        /* reset */
-       height: 31vh !important;
+       height: auto !important;
        max-height: none !important;
        width: auto !important;
        text-align: left;
    }
    
+   /* 3 graphiques côte à côte */
    #F-match_stats-canvas {
        display: grid;
        grid-template-columns: repeat(3, 1fr);
-       gap: 10px;
-       /* reset anciens styles flex */
-       flex-direction: unset !important;
-       justify-content: unset !important;
+       gap: 8px;
+       flex: 1;
+       min-height: 0;
+       overflow: hidden;
    }
    
-   /* .chart-wrap = nouveau wrapper (remplace #G-canva_container dupliqué) */
+   /* Chaque wrapper de graphique prend toute la hauteur de la grille */
    .chart-wrap,
    #G-canva_container {
        background: var(--bg-el);
        border-radius: var(--r-sm);
-       padding: 8px;
-       height: 300px;
+       padding: 6px;
        display: flex;
        flex-direction: column;
        min-width: 0;
+       min-height: 0;
+       height: 100%;
+       overflow: hidden;
    }
    
    .chart-wrap canvas,
@@ -511,133 +485,142 @@
        width: 100% !important;
        flex: 1;
        min-height: 0;
-       height: 0 !important; /* flex impose la hauteur */
+       height: 0 !important; /* flex dicte la hauteur */
    }
    
    /* ================================================================
       COLONNE DROITE — Physical
-      physic_get_info.js REMPLACE tout le innerHTML de #B-physical.
-      Il injecte :
-        <H1>TRAINING PERFS (30d)</H1>
-        <div id="C-movement">
-          <p>Agility</p>
-          <div id="D-phy-stats"><canvas id="chart-Agility"></canvas></div>
-        </div>
-        ... × 4
+      physic_get_info.js injecte H1 + 4× #C-movement > #D-phy-stats > canvas
    ================================================================ */
    #B-physical {
        background: var(--bg-card);
-       border-left: 10px solid var(--blue);
-       padding: 16px 12px;
+       border-left: 3px solid var(--blue);
+       padding: 12px 10px;
        display: flex;
        flex-direction: column;
-       gap: 10px;
-       overflow-y: auto;
-       min-height: 0;
-       max-height: 95vh;
+       gap: 8px;
+       height: 100%;
+       overflow: hidden;
        /* reset */
        max-width: none !important;
-       height: auto !important;
        color: var(--text);
        justify-content: flex-start !important;
        align-items: stretch !important;
+       border-radius: 0 !important;
    }
    
-   /* Titre injecté par physic_get_info.js : <H1>TRAINING PERFS (30d)</H1> */
+   /* H1 titre injecté */
    #B-physical H1,
    #B-physical h1 {
        font-family: 'Barlow Condensed', sans-serif;
-       font-size: 30px;
+       font-size: clamp(10px, 0.9vw, 13px) !important;
        font-weight: 700;
        letter-spacing: 2px;
        text-transform: uppercase;
-       color: var(--gold);
+       color: var(--gold) !important;
        text-align: center;
-       padding-bottom: 10px;
-       border-bottom: 1px solid var(--gold-border);
-       margin-bottom: 2px;
+       padding-bottom: 8px;
+       border-bottom: 1px solid var(--gold-bdr);
+       margin-bottom: 2px !important;
+       flex-shrink: 0;
    }
    
-   /* Blocs injectés : <div id="C-movement"> */
+   /* 4 blocs Agility / Jump / Sprint / UpperBody
+      Ils se partagent l'espace verticalement en parts égales */
    #B-physical #C-movement {
        background: var(--bg-el);
        border-radius: var(--r-sm);
-       padding: 10px;
+       padding: 6px 8px;
        display: flex;
        flex-direction: column;
-       gap: 6px;
-       /* reset (le #C-movement du centre a d'autres styles) */
+       gap: 4px;
+       flex: 1;       /* chaque bloc = 1/4 de l'espace disponible */
+       min-height: 0;
+       overflow: hidden;
+       /* reset */
        width: auto !important;
        height: auto !important;
        grid-template-columns: unset !important;
-       text-align: left;
        justify-content: flex-start !important;
        align-items: stretch !important;
-       overflow: visible !important;
        border-bottom: none;
    }
    
-   /* Label du groupe (ex: "Agility") */
+   /* Label groupe (ex: "Agility") */
    #B-physical #C-movement > p {
        font-family: 'Barlow Condensed', sans-serif;
-       font-size: 25px;
+       font-size: clamp(9px, 0.85vw, 11px);
        font-weight: 700;
        letter-spacing: 1.5px;
        text-transform: uppercase;
        color: var(--text-3);
+       flex-shrink: 0;
    }
    
-   /* Canvas wrapper */
+   /* Canvas wrapper : prend tout l'espace restant dans le bloc */
    #B-physical #D-phy-stats {
+       flex: 1;
+       min-height: 0;
        width: 100%;
-       height: 16vh;
        display: flex;
        align-items: stretch;
        padding: 0;
-       max-height: none !important;
-       justify-content: stretch;
+       overflow: hidden;
    }
    
    #B-physical #D-phy-stats canvas {
        width: 100% !important;
-       height: 15vh !important;
+       height: 100% !important;
+       min-height: 0 !important;
    }
    
    /* ================================================================
-      MOBILE
+      MOBILE — scroll autorisé en dessous de 900px
    ================================================================ */
-   @media (max-width: 960px) {
+   @media (max-width: 900px) {
+       html, body { overflow: auto; height: auto; }
+   
+       #A-base { height: auto; overflow: visible; }
+   
        #AB-top {
            flex-wrap: wrap;
            height: auto;
            padding: 10px 16px;
            gap: 8px;
        }
-   
        #top-select-wrapper { width: 100%; justify-content: center; }
        #E-player-select { width: 100%; }
    
        #AB-bot {
            grid-template-columns: 1fr;
-           min-height: auto;
+           grid-template-rows: auto;
+           height: auto;
+           overflow: visible;
+           background: var(--bg);
        }
    
        #B-left-sidebar,
        #B-main,
        #B-physical {
            border-left: none;
-           border-top: 1px solid var(--border);
-           overflow-y: visible;
+           border-right: none;
+           border-top: 2px solid var(--blue);
            height: auto;
+           overflow-y: visible;
+           max-height: none;
        }
    
-       #C-targets { grid-template-columns: repeat(3, 1fr); }
+       /* Rétablir les hauteurs fixes en mobile */
+       #E-recovery         { height: 280px !important; flex: none; }
+       #E-recovery-chart-container { height: 230px !important; flex: none; }
+       #F-recovery-chart   { height: 230px !important; }
+       #E-match_stats      { height: auto !important; flex: none; }
        #F-match_stats-canvas { grid-template-columns: 1fr; }
-   
        .chart-wrap,
-       #G-canva_container { height: 180px; }
-   }
+       #G-canva_container  { height: 200px; }
+       #C-targets          { height: auto !important; }
    
-   @media (max-width: 600px) {
-       #C-targets { grid-template-columns: 1fr; }
+       #B-physical #C-movement { flex: none; height: 140px; }
+       #B-physical #D-phy-stats { height: 110px; flex: none; }
+       #B-physical #D-phy-stats canvas { height: 110px !important; }
    }
